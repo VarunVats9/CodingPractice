@@ -7,6 +7,9 @@
 
 > 1 msec = 1000 * 1000 nsec
 
+> Disk Seek : Amount of time it takes a hard
+drive's read/write head to find the physical location of a piece of data on the disk.
+
 ### TABLE
 
 
