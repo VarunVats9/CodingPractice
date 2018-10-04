@@ -1,4 +1,4 @@
-package com.practice.youtube.channel.techdummies;
+package com.practice.youtube.channel.techdummies.countminsketch;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
