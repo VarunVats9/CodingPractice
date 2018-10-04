@@ -34,16 +34,24 @@ public class ConsistentHashing {
 
     public static class HashFunction {
 
-        private int prime;
-        private int odd;
+        private long prime;
+        private long odd;
 
-        public HashFunction(final int prime, final int odd) {
+        public HashFunction(final long prime, final long odd) {
             this.prime = prime;
             this.odd = odd;
         }
 
-        public int getHashValue(final String target) {
-            return ((target.hashCode() * this.prime) ^ this.odd) % LIMIT;
+        public int getHashValue(final String word) {
+            int hash = word.hashCode();
+            if (hash < 0) {
+                hash = Math.abs(hash);
+            }
+            return calculateHash(hash, prime, odd);
+        }
+
+        private int calculateHash(final int hash, final long prime, final long odd) {
+            return (int)((((hash % LIMIT) * prime) % LIMIT) * odd) % LIMIT;
         }
 
     }

@@ -56,16 +56,24 @@ public class ConsumerTask implements Runnable {
 
     private static class HashFunction {
 
-        private int prime;
-        private int odd;
+        private long prime;
+        private long odd;
 
-        public HashFunction(final int prime, final int odd) {
+        public HashFunction(final long prime, final long odd) {
             this.prime = prime;
             this.odd = odd;
         }
 
         public int getHashValue(final Character character) {
-            return ((character.hashCode() * this.prime) ^ this.odd) % LIMIT;
+            int hash = character.hashCode();
+            if (hash < 0) {
+                hash = Math.abs(hash);
+            }
+            return calculateHash(hash, prime, odd);
+        }
+
+        private int calculateHash(final int hash, final long prime, final long odd) {
+            return (int)((((hash % LIMIT) * prime) % LIMIT) * odd) % LIMIT;
         }
 
     }
