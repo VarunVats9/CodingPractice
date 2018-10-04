@@ -38,15 +38,15 @@ public class ConsumerTask implements Runnable {
             actualFrequency[alphabet - 'A']++;
 
             sketch[H1][h1.getHashValue(alphabet)]++;
-            sketch[H2][h1.getHashValue(alphabet)]++;
-            sketch[H3][h1.getHashValue(alphabet)]++;
-            sketch[H4][h1.getHashValue(alphabet)]++;
+            sketch[H2][h2.getHashValue(alphabet)]++;
+            sketch[H3][h3.getHashValue(alphabet)]++;
+            sketch[H4][h4.getHashValue(alphabet)]++;
 
             System.out.println("--------------------------------------------------------------------------");
 
             System.out.println("Actual Frequency of " + alphabet + " : " + actualFrequency[alphabet - 'A']);
             System.out.println("Count Min Sketch of " + alphabet + " : " + findMinimum(sketch[H1][h1.getHashValue(alphabet)],
-                    sketch[H2][h1.getHashValue(alphabet)], sketch[H3][h1.getHashValue(alphabet)], sketch[H4][h1.getHashValue(alphabet)]));
+                    sketch[H2][h2.getHashValue(alphabet)], sketch[H3][h3.getHashValue(alphabet)], sketch[H4][h4.getHashValue(alphabet)]));
         }
     }
 

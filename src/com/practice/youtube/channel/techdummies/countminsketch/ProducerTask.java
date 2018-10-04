@@ -24,7 +24,7 @@ public class ProducerTask implements Runnable {
     public void run() {
 
         while (true) {
-            final int randomNumber = ThreadLocalRandom.current().nextInt(27);
+            final int randomNumber = ThreadLocalRandom.current().nextInt(26);
             blockingQueue.add(alphabets[randomNumber]);
             try {
                 Thread.sleep(1000);
