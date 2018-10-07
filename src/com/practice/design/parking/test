@@ -1,0 +1,19 @@
+3
+park KA-01-HH-1234 white
+park KA-01-HH-1234 white
+park DL-01-PO-9875 blue
+park HP-09-UO-9679 black
+park OR-10-UO-9679 black
+status
+leave 10
+leave 1
+status
+slot_number_for_registration_number DL-01-PO-9875
+registration_numbers_for_cars_with_color blue
+slot_numbers_for_cars_with_color black
+park PN-11-OL-1435 white
+status
+stop
+
+
+
