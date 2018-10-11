@@ -9,7 +9,7 @@ public class FloodFill {
 
     private static final String SEPARATOR = "--------------------------------------------------------------------";
 
-    private static final int[][] directions = new int[][]{
+    private static final int[][] DIRECTIONS = new int[][]{
             {0, 1},
             {1, 0},
             {0, -1},
@@ -44,9 +44,9 @@ public class FloodFill {
                 if (matrix[pair.row][pair.col] == 3) {
                     continue;
                 }
-                for (int i = 0; i < directions.length; i++) {
-                    int x = pair.row + directions[i][0];
-                    int y = pair.col + directions[i][1];
+                for (int i = 0; i < DIRECTIONS.length; i++) {
+                    int x = pair.row + DIRECTIONS[i][0];
+                    int y = pair.col + DIRECTIONS[i][1];
                     if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length || matrix[x][y] != 2 || visited.contains(new Pair(x, y))) {
                         continue;
                     }
@@ -90,9 +90,9 @@ public class FloodFill {
             return;
         }
 
-        for (int i = 0; i < directions.length; i++) {
-            int x = pair.row + directions[i][0];
-            int y = pair.col + directions[i][1];
+        for (int i = 0; i < DIRECTIONS.length; i++) {
+            int x = pair.row + DIRECTIONS[i][0];
+            int y = pair.col + DIRECTIONS[i][1];
             if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length || matrix[x][y] != 2 || visited.contains(new Pair(x, y))) {
                 continue;
             }
