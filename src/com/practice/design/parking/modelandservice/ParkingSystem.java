@@ -1,4 +1,4 @@
-package com.practice.design.parking.model;
+package com.practice.design.parking.modelandservice;
 
 import java.util.ArrayList;
 import java.util.Collections;

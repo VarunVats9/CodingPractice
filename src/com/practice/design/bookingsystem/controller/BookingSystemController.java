@@ -6,9 +6,7 @@ import com.practice.design.bookingsystem.model.BookingSystemFacade;
 import com.practice.design.bookingsystem.view.BookingSystemOutput;
 import com.practice.design.bookingsystem.view.UserInput;
 
-/**
- * Created by vvats on 30/09/18.
- */
+
 public class BookingSystemController {
 
     public static void main(String[] args) {

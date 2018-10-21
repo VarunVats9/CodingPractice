@@ -1,8 +1,6 @@
 package com.practice.design.bookingsystem.model;
 
-/**
- * Created by vvats on 30/09/18.
- */
+
 public class BookingSystemFacade {
 
     private static final int MOVIE = 1;

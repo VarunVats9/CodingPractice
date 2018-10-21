@@ -2,7 +2,7 @@ package com.practice.design.parking.controller;
 
 import java.util.List;
 
-import com.practice.design.parking.model.ParkingSystem;
+import com.practice.design.parking.modelandservice.ParkingSystem;
 
 /*
  * This class acts as a controller, it takes the instructions from user interface and forwards it to the

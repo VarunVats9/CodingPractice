@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.practice.design.parking.controller.ParkingManager;
-import com.practice.design.parking.model.ParkingSystem;
+import com.practice.design.parking.modelandservice.ParkingSystem;
 
 /*
  * This class acts as a View and Main class, it takes the input from user, gives it to the controller.
