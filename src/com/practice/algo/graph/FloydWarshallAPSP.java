@@ -19,21 +19,22 @@ public class FloydWarshallAPSP {
 
         final int nodes = 4;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
-        graph.addEdge(1, 2, 5);
-        graph.addEdge(2, 3, 3);
-        graph.addEdge(3, 4, 1);
-        graph.addEdge(1, 4, 10);
+        G.addEdge(0, 1, 5);
+        G.addEdge(1, 2, 3);
+        G.addEdge(2, 3, 1);
+        G.addEdge(0, 3, 10);
 
 
-        int[][] dp = new int[nodes + 1][nodes + 1];
+        double[][] dp = new double[nodes][nodes];
 
-        for (int i = 1; i <= nodes; i++) {
-            final Map<Integer, Integer> neighbours = graph.getNeighbouringNodes(i)
+        for (int i = 0; i < nodes; i++) {
+            final int vertex = i;
+            final Map<Integer, Double> neighbours = G.adj(vertex)
                     .stream()
-                    .collect(Collectors.toMap(e -> e.node, e -> e.weight));
-            for (int j = 1; j <= nodes; j++) {
+                    .collect(Collectors.toMap(e -> e.other(vertex), e -> e.getWeight()));
+            for (int j = 0; j < nodes; j++) {
                 if (i == j) {
                     dp[i][j] = 0;
                     continue;
@@ -46,9 +47,9 @@ public class FloydWarshallAPSP {
             }
         }
 
-        for (int i = 1; i <= nodes; i++) {
-            for (int j = 1; j <= nodes; j++) {
-                for (int k = 1; k <= nodes; k++) {
+        for (int i = 0; i < nodes; i++) {
+            for (int j = 0; j < nodes; j++) {
+                for (int k = 0; k < nodes; k++) {
                     dp[i][j] = Math.min(dp[i][k] + dp[k][j], dp[i][j]);
                 }
             }
@@ -58,17 +59,17 @@ public class FloydWarshallAPSP {
 
     }
 
-    private static void tableCreation(final int nodes, final int[][] dp) {
+    private static void tableCreation(final int nodes, final double[][] dp) {
         final StringBuilder stringBuilder = new StringBuilder();
         int k = nodes;
         while (k > 0) {
             stringBuilder.append("%15s");
             k--;
         }
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             System.out.print(i + " | ");
             final List<String> row = new ArrayList<>();
-            for (int j = 1; j <= nodes; j++) {
+            for (int j = 0; j < nodes; j++) {
                 final String value = dp[i][j] == INF ? "INF (" + j + ")" : String.valueOf(dp[i][j]) + " (" + j + ")";
                 row.add(value);
             }

@@ -22,58 +22,73 @@ public class DijkstraSP {
 
         final int nodes = 9;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
-        graph.addEdge(1, 2, 4);
-        graph.addEdge(2, 3, 8);
-        graph.addEdge(3, 4, 7);
-        graph.addEdge(4, 5, 9);
-        graph.addEdge(5, 6, 10);
-        graph.addEdge(6, 7, 2);
-        graph.addEdge(7, 8, 1);
-        graph.addEdge(8, 1, 8);
+        G.addEdge(0, 1, 4);
+        G.addEdge(1, 2, 8);
+        G.addEdge(2, 3, 7);
+        G.addEdge(3, 4, 9);
+        G.addEdge(4, 5, 10);
+        G.addEdge(5, 6, 2);
+        G.addEdge(6, 7, 1);
+        G.addEdge(7, 0, 8);
 
-        graph.addEdge(2, 8, 11);
-        graph.addEdge(8, 9, 7);
-        graph.addEdge(9, 7, 6);
+        G.addEdge(1, 7, 11);
+        G.addEdge(7, 8, 7);
+        G.addEdge(8, 6, 6);
 
-        graph.addEdge(3, 9, 2);
-        graph.addEdge(3, 6, 4);
-        graph.addEdge(4, 6, 14);
+        G.addEdge(2, 8, 2);
+        G.addEdge(2, 5, 4);
+        G.addEdge(3, 5, 14);
 
-        boolean visited[] = new boolean[nodes + 1];
-        int parent[] = new int[nodes + 1];
+        boolean visited[] = new boolean[nodes];
+        int parent[] = new int[nodes];
 
-        final int source = 1;
+        final int source = 0;
 
         List<Integer> nodesAddedTillNow = new ArrayList<>();
 
-        Queue<Edge> queue = new PriorityQueue<Edge>(Comparator.comparing(a -> a.weight));
-        queue.add(new Edge(1, 1, 0));
+        Queue<Edge> queue = new PriorityQueue<Edge>();
+        queue.add(new Edge(0, 0, 0));
 
         while (nodesAddedTillNow.size() != nodes) {
 
-            final Edge top = queue.poll();
-            if (visited[top.dest]) {
+            final Edge topEdge = queue.poll();
+
+            final int currentVertex = topEdge.either();
+            final int otherVertex = topEdge.other(currentVertex);
+            int vertexDest = currentVertex;
+            int vertexSrc = otherVertex;
+
+            if (visited[currentVertex] && visited[otherVertex]) {
                 continue;
             }
-            visited[top.dest] = true;
-            nodesAddedTillNow.add(top.dest);
-            parent[top.dest] = top.src;
 
-            final int weightOfNode = top.weight;
+            if (visited[currentVertex]) {
+                vertexDest = otherVertex;
+                vertexSrc = currentVertex;
+            }
 
-            System.out.println("Adding node ---> " + top.dest + " with distance: " + "[" + weightOfNode + "]");
 
-            graph.getNeighbouringEdges(top.dest)
+            visited[vertexDest] = true;
+            nodesAddedTillNow.add(vertexDest);
+            parent[vertexDest] = vertexSrc;
+
+            final double weightOfNode = topEdge.getWeight();
+
+            System.out.println("Adding node ---> " + vertexDest + " with distance: " + "[" + weightOfNode + "]");
+
+            final int finalVertexDest = vertexDest;
+            G.adj(vertexDest)
                     .forEach(edge -> {
-                        queue.add(new Edge(top.dest, edge.dest, edge.weight + weightOfNode));
+                        final int otherEnd = edge.other(finalVertexDest);
+                        queue.add(new Edge(finalVertexDest, otherEnd, edge.getWeight() + weightOfNode));
                     });
 
         }
 
         // find the path.
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             stack.clear();
             findParent(parent, i, source);
             System.out.println(stack);

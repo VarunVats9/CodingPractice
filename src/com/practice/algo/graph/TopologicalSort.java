@@ -16,21 +16,21 @@ public class TopologicalSort {
 
         final int nodes = 6;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
-        graph.addEdge(6, 1);
-        graph.addEdge(5, 1);
-        graph.addEdge(6, 3);
-        graph.addEdge(5, 2);
+        G.addEdge(5, 0);
+        G.addEdge(4, 0);
+        G.addEdge(5, 2);
+        G.addEdge(4, 1);
 
-        graph.addEdge(4, 2);
-        graph.addEdge(3, 4);
+        G.addEdge(3, 1);
+        G.addEdge(2, 3);
 
-        boolean[] visited = new boolean[nodes + 1];
+        boolean[] visited = new boolean[nodes];
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             if (!visited[i]) {
-                dfs(visited, graph, i);
+                dfs(visited, G, i);
             }
         }
 
@@ -41,10 +41,11 @@ public class TopologicalSort {
 
     private static void dfs(final boolean[] visited, final GraphCreator graph, final int start) {
         visited[start] = true;
-        graph.getNeighbouringNodes(start)
-                .forEach(node -> {
-                    if (!visited[node.node]) {
-                        dfs(visited, graph, node.node);
+        graph.adj(start)
+                .forEach(edge -> {
+                    final int otherEnd = edge.other(start);
+                    if (!visited[otherEnd]) {
+                        dfs(visited, graph, otherEnd);
                     }
                 });
         stack.add(start);

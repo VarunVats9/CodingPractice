@@ -11,42 +11,43 @@ public class Dfs {
 
         final int nodes = 9;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
-        graph.addEdge(1, 2, 4);
-        graph.addEdge(2, 3, 8);
-        graph.addEdge(3, 4, 7);
-        graph.addEdge(4, 5, 9);
-        graph.addEdge(5, 6, 10);
-        graph.addEdge(6, 7, 2);
-        graph.addEdge(7, 8, 1);
-        graph.addEdge(8, 1, 4);
+        G.addEdge(0, 1, 4);
+        G.addEdge(1, 2, 8);
+        G.addEdge(2, 3, 7);
+        G.addEdge(3, 4, 9);
+        G.addEdge(4, 5, 10);
+        G.addEdge(5, 6, 2);
+        G.addEdge(6, 7, 1);
+        G.addEdge(7, 0, 4);
 
-        graph.addEdge(2, 8, 11);
-        graph.addEdge(8, 9, 7);
-        graph.addEdge(9, 7, 6);
+        G.addEdge(1, 7, 11);
+        G.addEdge(7, 8, 7);
+        G.addEdge(8, 6, 6);
 
-        graph.addEdge(3, 9, 2);
-        graph.addEdge(3, 6, 4);
-        graph.addEdge(4, 6, 14);
+        G.addEdge(2, 8, 2);
+        G.addEdge(2, 5, 4);
+        G.addEdge(3, 5, 14);
 
-        boolean visited[] = new boolean[nodes + 1];
+        boolean visited[] = new boolean[nodes];
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             if (!visited[i]) {
-                dfs(visited, graph, i);
+                dfs(visited, G, i);
             }
         }
 
     }
 
-    private static void dfs(final boolean[] visited, final GraphCreator graph, final int start) {
+    private static void dfs(final boolean[] visited, final GraphCreator G, final int start) {
         visited[start] = true;
-        graph.getNeighbouringEdges(start)
+        G.adj(start)
                 .forEach(edge -> {
-                    if (!visited[edge.dest]) {
-                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + edge.dest);
-                        dfs(visited, graph, edge.dest);
+                    final int otherEnd = edge.other(start);
+                    if (!visited[otherEnd]) {
+                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + otherEnd);
+                        dfs(visited, G, otherEnd);
                     }
                 });
     }

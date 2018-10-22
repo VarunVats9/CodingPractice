@@ -15,27 +15,27 @@ public class KosarajuSCC {
 
         final int nodes = 5;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 1);
-        graph.addEdge(2, 4);
-        graph.addEdge(4, 5);
+        G.addEdge(0, 1);
+        G.addEdge(1, 2);
+        G.addEdge(2, 0);
+        G.addEdge(1, 3);
+        G.addEdge(3, 4);
 
-        boolean[] visited = new boolean[nodes + 1];
+        boolean[] visited = new boolean[nodes];
 
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             if (!visited[i]) {
-                dfs(visited, graph, i, stack);
+                dfs(visited, G, i, stack);
             }
         }
 
-        final GraphCreator transposeGraph = graph.transpose();
+        final GraphCreator transposeGraph = G.reverse();
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             visited[i] = false;
         }
 
@@ -55,26 +55,28 @@ public class KosarajuSCC {
 
     }
 
-    private static void dfs(final boolean[] visited, final GraphCreator graph, final int start, final Stack<Integer> stack) {
+    private static void dfs(final boolean[] visited, final GraphCreator G, final int start, final Stack<Integer> stack) {
         visited[start] = true;
-        graph.getNeighbouringEdges(start)
+        G.adj(start)
                 .forEach(edge -> {
-                    if (!visited[edge.dest]) {
-                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + edge.dest);
-                        dfs(visited, graph, edge.dest, stack);
+                    final int otherEnd = edge.other(start);
+                    if (!visited[otherEnd]) {
+                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + otherEnd);
+                        dfs(visited, G, otherEnd, stack);
                     }
                 });
         System.out.println("Pushing into the stack -----> " + start);
         stack.push(start);
     }
 
-    private static void dfs(final boolean[] visited, final GraphCreator graph, final int start, final int number) {
+    private static void dfs(final boolean[] visited, final GraphCreator G, final int start, final int number) {
         visited[start] = true;
         System.out.println("Part of SCC #" + number + " node is ---------> " + start);
-        graph.getNeighbouringEdges(start)
+        G.adj(start)
                 .forEach(edge -> {
-                    if (!visited[edge.dest]) {
-                        dfs(visited, graph, edge.dest, number);
+                    final int otherEnd = edge.other(start);
+                    if (!visited[otherEnd]) {
+                        dfs(visited, G, otherEnd, number);
                     }
                 });
     }

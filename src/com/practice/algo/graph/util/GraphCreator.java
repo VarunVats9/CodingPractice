@@ -1,70 +1,79 @@
 package com.practice.algo.graph.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by vvats on 26/09/18.
  */
 public class GraphCreator {
 
-    private int nodes;
+    private int V;
+    private int E;
     private Graph type;
-    private List<Set<Node>> graph;
+    private List<Edge>[] adj;
 
     public enum Graph {
         DIRECTED,
         UNDIRECTED
     }
 
-    public GraphCreator(final int nodes, final Graph typeOfGraph) {
-        this.nodes = nodes;
+    public GraphCreator(final int V, final Graph typeOfGraph) {
+        this.V = V;
         this.type = typeOfGraph;
         this.createGraph();
     }
 
     private void createGraph() {
-        graph = new ArrayList<>(this.nodes + 1);
-        for (int i = 0; i <= this.nodes; i++) {
-            graph.add(new HashSet<>());
+        adj = new List[this.V];
+        for (int i = 0; i < this.V; i++) {
+            adj[i] = new ArrayList<>();
         }
     }
 
-    public void addEdge(final int x, final int y) {
-        addEdge(x, y, 1);
+    public void addEdge(final int v, final int w) {
+        addEdge(v, w, 1);
     }
 
-    public void addEdge(final int x, final int y, final int weight) {
-        graph.get(x).add(new Node(y, weight));
+    public void addEdge(final int v, final int w, final int weight) {
+        adj[v].add(new Edge(v, w, weight));
         if (Graph.UNDIRECTED.equals(this.type)) {
-            graph.get(y).add(new Node(x, weight));
+            adj[w].add(new Edge(w, v, weight));
+
         }
+        this.E++;
     }
 
-    public Set<Node> getNeighbouringNodes(final int x) {
-        return graph.get(x);
+    public List<Edge> adj(final int v) {
+        return adj[v];
     }
 
-    public Set<Edge> getNeighbouringEdges(final int x) {
-        return graph.get(x)
-                .stream()
-                .map(node -> new Edge(x, node.node, node.weight))
-                .collect(Collectors.toSet());
+    public List<Edge> edges() {
+        final List<Edge> edges = new ArrayList<>();
+        for (int i = 0; i < this.V; i++) {
+            edges.addAll(adj(i));
+        }
+        return edges;
     }
 
-    public GraphCreator transpose() {
-        final GraphCreator newGraph = new GraphCreator(this.nodes, Graph.DIRECTED);
+    public GraphCreator reverse() {
+        final GraphCreator newGraph = new GraphCreator(this.V, Graph.DIRECTED);
         newGraph.createGraph();
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < V; i++) {
             final int start = i;
-            this.getNeighbouringNodes(i)
-                    .forEach(node -> {
-                        newGraph.addEdge(node.node, start);
+            this.adj(start)
+                    .forEach(edge -> {
+                        newGraph.addEdge(edge.other(start), start);
                     });
         }
         return newGraph;
+    }
+
+    public int V() {
+        return this.V;
+    }
+
+    public int E() {
+        return this.E;
     }
 }

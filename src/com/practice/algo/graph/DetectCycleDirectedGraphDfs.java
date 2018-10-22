@@ -14,39 +14,40 @@ public class DetectCycleDirectedGraphDfs {
 
         final int nodes = 6;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(1, 4);
-        graph.addEdge(4, 5);
-        graph.addEdge(5, 2);
-        graph.addEdge(5, 6);
-        graph.addEdge(6, 4);
+        G.addEdge(0, 1);
+        G.addEdge(1, 2);
+        G.addEdge(0, 3);
+        G.addEdge(3, 4);
+        G.addEdge(4, 1);
+        G.addEdge(4, 5);
+        G.addEdge(5, 3);
 
-        boolean[] visited = new boolean[nodes + 1];
+        boolean[] visited = new boolean[nodes];
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             if (!visited[i]) {
-                dfs(visited, graph, i, new HashSet<>());
+                dfs(visited, G, i, new HashSet<>());
             }
         }
 
     }
 
-    private static void dfs(final boolean[] visited, final GraphCreator graph, final int start, final Set<Integer> parentSet) {
+    private static void dfs(final boolean[] visited, final GraphCreator G, final int start, final Set<Integer> parentSet) {
         visited[start] = true;
         // Add to the current stack.
         parentSet.add(start);
-        graph.getNeighbouringEdges(start)
+        G.adj(start)
                 .forEach(edge -> {
-                    if (parentSet.contains(edge.dest)) {
-                        System.out.println("Found a back edge from " + start + " ----> " + edge.dest);
+                    final int otherEnd = edge.other(start);
+                    if (parentSet.contains(otherEnd)) {
+                        System.out.println("Found a back edge from " + start + " ----> " + otherEnd);
                         return;
                     }
-                    if (!visited[edge.dest]) {
-                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + edge.dest);
-                        dfs(visited, graph, edge.dest, parentSet);
+                    if (!visited[otherEnd]) {
+                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + otherEnd);
+                        dfs(visited, G, otherEnd, parentSet);
                     }
                 });
         // Remove from the current stack.

@@ -18,32 +18,32 @@ public class KruskalMST {
 
         final int nodes = 9;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
-        graph.addEdge(1, 2, 4);
-        graph.addEdge(2, 3, 8);
-        graph.addEdge(3, 4, 7);
-        graph.addEdge(4, 5, 9);
-        graph.addEdge(5, 6, 10);
-        graph.addEdge(6, 7, 2);
-        graph.addEdge(7, 8, 1);
-        graph.addEdge(8, 1, 4);
+        G.addEdge(0, 1, 4);
+        G.addEdge(1, 2, 8);
+        G.addEdge(2, 3, 7);
+        G.addEdge(3, 4, 9);
+        G.addEdge(4, 5, 10);
+        G.addEdge(5, 6, 2);
+        G.addEdge(6, 7, 1);
+        G.addEdge(7, 0, 4);
 
-        graph.addEdge(2, 8, 11);
-        graph.addEdge(8, 9, 7);
-        graph.addEdge(9, 7, 6);
+        G.addEdge(1, 7, 11);
+        G.addEdge(7, 8, 7);
+        G.addEdge(8, 6, 6);
 
-        graph.addEdge(3, 9, 2);
-        graph.addEdge(3, 6, 4);
-        graph.addEdge(4, 6, 14);
+        G.addEdge(2, 8, 2);
+        G.addEdge(2, 5, 4);
+        G.addEdge(3, 5, 14);
 
-        boolean visited[] = new boolean[nodes + 1];
-        int parent[] = new int[nodes + 1];
+        boolean visited[] = new boolean[nodes];
+        int parent[] = new int[nodes];
 
-        PriorityQueue<Edge> minHeap = new PriorityQueue<Edge>(Comparator.comparing(a -> a.weight));
+        PriorityQueue<Edge> minHeap = new PriorityQueue<Edge>();
 
-        for (int i = 1; i <= nodes; i++) {
-            minHeap.addAll(graph.getNeighbouringEdges(i));
+        for (int i = 0; i < nodes; i++) {
+            minHeap.addAll(G.adj(i));
         }
 
         Set<Integer> nodesAddedToGraph = new HashSet<>();
@@ -52,27 +52,27 @@ public class KruskalMST {
 
             final Edge topEdge = minHeap.poll();
 
-            final Integer srcNode = topEdge.src;
-            final Integer destNode = topEdge.dest;
+            final int currentVertex = topEdge.either();
+            final int otherVertex = topEdge.other(currentVertex);
 
-            if (visited[srcNode] && visited[destNode]) {
-                if (findParent(parent, srcNode) == findParent(parent, destNode)) {
+            if (visited[currentVertex] && visited[otherVertex]) {
+                if (findParent(parent, currentVertex) == findParent(parent, otherVertex)) {
                     continue;
                 }
-                union(parent, srcNode, destNode);
-                System.out.println("Added Edge " + srcNode + "  -----> " + destNode + " with weight " + topEdge.weight);
+                union(parent, currentVertex, otherVertex);
+                System.out.println("Added Edge " + currentVertex + "  -----> " + otherVertex + " with weight " + topEdge.getWeight());
                 continue;
             }
 
-            if (!visited[srcNode]) {
-                nodesAddedToGraph.add(srcNode);
-                visited[srcNode] = true;
-                if (!visited[destNode]) {
-                    nodesAddedToGraph.add(destNode);
-                    visited[destNode] = true;
+            if (!visited[currentVertex]) {
+                nodesAddedToGraph.add(currentVertex);
+                visited[currentVertex] = true;
+                if (!visited[otherVertex]) {
+                    nodesAddedToGraph.add(otherVertex);
+                    visited[otherVertex] = true;
                 }
-                union(parent, srcNode, destNode);
-                System.out.println("Added Edge " + srcNode + "  -----> " + destNode + " with weight " + topEdge.weight);
+                union(parent, currentVertex, otherVertex);
+                System.out.println("Added Edge " + currentVertex + "  -----> " + otherVertex + " with weight " + topEdge.getWeight());
             }
         }
     }

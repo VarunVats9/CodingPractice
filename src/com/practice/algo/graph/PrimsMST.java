@@ -20,48 +20,58 @@ public class PrimsMST {
 
         final int nodes = 9;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
-        graph.addEdge(1, 2, 4);
-        graph.addEdge(2, 3, 8);
-        graph.addEdge(3, 4, 7);
-        graph.addEdge(4, 5, 9);
-        graph.addEdge(5, 6, 10);
-        graph.addEdge(6, 7, 2);
-        graph.addEdge(7, 8, 1);
-        graph.addEdge(8, 1, 4);
+        G.addEdge(0, 1, 4);
+        G.addEdge(1, 2, 8);
+        G.addEdge(2, 3, 7);
+        G.addEdge(3, 4, 9);
+        G.addEdge(4, 5, 10);
+        G.addEdge(5, 6, 2);
+        G.addEdge(6, 7, 1);
+        G.addEdge(7, 0, 4);
 
-        graph.addEdge(2, 8, 11);
-        graph.addEdge(8, 9, 7);
-        graph.addEdge(9, 7, 6);
+        G.addEdge(1, 7, 11);
+        G.addEdge(7, 8, 7);
+        G.addEdge(8, 6, 6);
 
-        graph.addEdge(3, 9, 2);
-        graph.addEdge(3, 6, 4);
-        graph.addEdge(4, 6, 14);
+        G.addEdge(2, 8, 2);
+        G.addEdge(2, 5, 4);
+        G.addEdge(3, 5, 14);
 
-        boolean visited[] = new boolean[nodes + 1];
+        boolean visited[] = new boolean[nodes];
 
-        PriorityQueue<Edge> minHeap = new PriorityQueue<Edge>(Comparator.comparing(a -> a.weight));
+        PriorityQueue<Edge> minHeap = new PriorityQueue<Edge>();
 
         List<Integer> nodesAddedToGraph = new ArrayList<>();
         nodesAddedToGraph.add(1);
         visited[1] = true;
         System.out.println("Added Edge " + 1 + " with weight " + 0);
 
-        minHeap.addAll(graph.getNeighbouringEdges(1));
+        minHeap.addAll(G.adj(1));
 
         while (nodesAddedToGraph.size() != nodes) {
 
             final Edge topEdge = minHeap.poll();
 
-            if (visited[topEdge.dest]) {
+            final int currentVertex = topEdge.either();
+            final int otherVertex = topEdge.other(currentVertex);
+            int vertexDest = currentVertex;
+            int vertexSrc = otherVertex;
+
+            if (visited[currentVertex] && visited[otherVertex]) {
                 continue;
             }
 
-            minHeap.addAll(graph.getNeighbouringEdges(topEdge.dest));
-            visited[topEdge.dest] = true;
-            nodesAddedToGraph.add(topEdge.dest);
-            System.out.println("Added Edge " + topEdge.src + "  -----> " + topEdge.dest + " with weight " + topEdge.weight);
+            if (visited[currentVertex]) {
+                vertexDest = otherVertex;
+                vertexSrc = currentVertex;
+            }
+
+            minHeap.addAll(G.adj(vertexDest));
+            visited[vertexDest] = true;
+            nodesAddedToGraph.add(vertexDest);
+            System.out.println("Added Edge " + vertexSrc + "  -----> " + vertexDest + " with weight " + topEdge.getWeight());
         }
 
     }

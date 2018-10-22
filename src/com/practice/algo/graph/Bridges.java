@@ -17,29 +17,29 @@ public class Bridges {
 
         final int nodes = 8;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 1);
-        graph.addEdge(3, 4);
+        G.addEdge(0, 1);
+        G.addEdge(1, 2);
+        G.addEdge(2, 0);
+        G.addEdge(2, 3);
 
-        graph.addEdge(4, 5);
-        graph.addEdge(5, 6);
-        graph.addEdge(5, 7);
-        graph.addEdge(6, 7);
+        G.addEdge(3, 4);
+        G.addEdge(4, 5);
+        G.addEdge(4, 6);
+        G.addEdge(5, 6);
 
-        graph.addEdge(6, 8);
+        G.addEdge(5, 7);
 
-        int[] discv = new int[nodes + 1];
-        boolean[] visited = new boolean[nodes + 1];
-        int parent[] = new int[nodes + 1];
-        int low[] = new int[nodes + 1];
+        int[] discv = new int[nodes];
+        boolean[] visited = new boolean[nodes];
+        int parent[] = new int[nodes];
+        int low[] = new int[nodes];
         List<List<Integer>> bridges = new ArrayList<>();
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             if (!visited[i]) {
-                dfs(discv, visited, parent, bridges, low, i, graph);
+                dfs(discv, visited, parent, bridges, low, i, G);
             }
         }
 
@@ -47,14 +47,14 @@ public class Bridges {
     }
 
     private static void dfs(final int[] discv, final boolean[] visited, final int[] parent, final List<List<Integer>> bridges,
-                            final int[] low, final int start, final GraphCreator graph) {
+                            final int[] low, final int start, final GraphCreator G) {
 
         visited[start] = true;
         discv[start] = low[start] = ++time;
 
-        graph.getNeighbouringNodes(start)
-                .forEach(node -> {
-                    final int adj = node.node;
+        G.adj(start)
+                .forEach(edge -> {
+                    final int adj = edge.other(start);
 
                     // All the unvisited neighbours (parent would have already been visited)
                     if (!visited[adj]) {
@@ -63,7 +63,7 @@ public class Bridges {
                         parent[adj] = start;
 
                         // Call the dfs on the neighbour.
-                        dfs(discv, visited, parent, bridges, low, adj, graph);
+                        dfs(discv, visited, parent, bridges, low, adj, G);
 
                         // Neighbour dfs has been done, lets see if we can reduce low for the node.
                         low[start] = Math.min(low[start], low[adj]);

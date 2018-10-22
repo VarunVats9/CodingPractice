@@ -14,51 +14,53 @@ public class BellmondFordSP {
 
         final int nodes = 5;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
-        graph.addEdge(1, 2, -1);
-        graph.addEdge(2, 3, 2);
-        graph.addEdge(3, 4, -3);
-        graph.addEdge(4, 5, -5);
-        graph.addEdge(1, 5, 4);
+        G.addEdge(0, 1, -1);
+        G.addEdge(1, 2, 2);
+        G.addEdge(2, 3, -3);
+        G.addEdge(3, 4, -5);
+        G.addEdge(0, 4, 4);
 
-        graph.addEdge(2, 5, 3);
-        graph.addEdge(2, 4, -2);
+        G.addEdge(1, 4, 3);
+        G.addEdge(1, 3, -2);
 
         // Negative edge cycle.
-        graph.addEdge(4, 2, 1);
+        G.addEdge(3, 1, 1);
 
-        int[] dp = new int[nodes + 1];
+        double[] dp = new double[nodes];
 
-        for (int i = 1; i <= nodes; i++) {
+        for (int i = 0; i < nodes; i++) {
             dp[i] = Integer.MAX_VALUE;
         }
 
-        final int source = 1;
+        final int source = 0;
 
         dp[source] = 0;
 
-        for (int i = 1; i < nodes; i++) {
-            for (int j = source; j <= nodes; j++) {
+        for (int i = 0; i < nodes; i++) {
+            for (int j = source; j < nodes; j++) {
                 if (dp[j] == Integer.MAX_VALUE) {
                     continue;
                 }
                 final int start = j;
-                graph.getNeighbouringNodes(start)
-                        .forEach(node -> {
-                            dp[node.node] = Math.min(dp[start] + node.weight, dp[node.node]);
+                G.adj(start)
+                        .forEach(edge -> {
+                            final int otherEnd = edge.other(start);
+                            dp[otherEnd] = Math.min(dp[start] + edge.getWeight(), dp[otherEnd]);
                         });
             }
         }
 
-        for (int j = source; j <= nodes; j++) {
+        for (int j = source; j < nodes; j++) {
             if (dp[j] == Integer.MAX_VALUE) {
                 continue;
             }
             final int start = j;
-            graph.getNeighbouringNodes(start)
-                    .forEach(node -> {
-                        if (dp[start] + node.weight < dp[node.node]) {
+            G.adj(start)
+                    .forEach(edge -> {
+                        final int otherEnd = edge.other(start);
+                        if (dp[start] + edge.getWeight() < dp[otherEnd]) {
                             System.out.println("Negative edge cycle is present");
                             isNegativeCyclePresent = true;
                             return;
@@ -66,7 +68,7 @@ public class BellmondFordSP {
                     });
         }
 
-        for (int i = 1; i <= nodes && !isNegativeCyclePresent; i++) {
+        for (int i = 0; i < nodes && !isNegativeCyclePresent; i++) {
             System.out.println("Shortest distance from source : " + source + " to destination : " + i + " has distance  ----> " + dp[i]);
         }
 

@@ -19,19 +19,19 @@ public class TopologicalSortParallelScheduler {
 
         final int nodes = 6;
 
-        final GraphCreator graph = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
+        final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
 
         // 1) 1 -> 2 -> 3, this means 1 is dependent on 2 and 2 is dependent on 3. Hence, 3 should be the first one to run.
         // 2 ) At some places, it means 1 has to be done prior to 2 and 2 prior to 3. Which makes 1 as root.
-        // The only difference is transpose of graph. Here I', taking second (2) approach.
+        // The only difference is reverse of graph. Here I', taking second (2) approach.
 
-        graph.addEdge(6, 1);
-        graph.addEdge(5, 1);
-        graph.addEdge(6, 3);
-        graph.addEdge(5, 2);
+        G.addEdge(6, 1);
+        G.addEdge(5, 1);
+        G.addEdge(6, 3);
+        G.addEdge(5, 2);
 
-        graph.addEdge(4, 2);
-        graph.addEdge(3, 4);
+        G.addEdge(4, 2);
+        G.addEdge(3, 4);
 
         boolean[] visited = new boolean[nodes + 1];
 
@@ -41,7 +41,7 @@ public class TopologicalSortParallelScheduler {
 
         for (int i = 1; i <= nodes; i++) {
             if (!visited[i]) {
-                topologicalSort(graph, i, visited);
+                topologicalSort(G, i, visited);
             }
         }
 
@@ -51,7 +51,7 @@ public class TopologicalSortParallelScheduler {
         while (!topologicalOrder.isEmpty()) {
             final Integer node = topologicalOrder.pop();
             System.out.println("TopoOrder : " + node);
-            dfsOnGraph(nodeAtSameLevel, topoSet, node, graph, 0);
+            dfsOnGraph(nodeAtSameLevel, topoSet, node, G, 0);
         }
 
         System.out.println(nodeAtSameLevel);
@@ -68,7 +68,7 @@ public class TopologicalSortParallelScheduler {
     }
 
     private static void dfsOnGraph(final Map<Integer, Set<Integer>> nodeAtSameLevel,
-        final Set<Integer> topoSet, final Integer node, final GraphCreator graph, int count) {
+        final Set<Integer> topoSet, final Integer node, final GraphCreator G, int count) {
 
         if (!topoSet.contains(node)) {
             return;
@@ -82,24 +82,26 @@ public class TopologicalSortParallelScheduler {
 
         nodeAtSameLevel.get(count).add(node);
 
-        graph.getNeighbouringNodes(node)
-                .forEach(neighbour -> {
-                    dfsOnGraph(nodeAtSameLevel, topoSet, neighbour.node, graph, count+1);
+        G.adj(node)
+                .forEach(edge -> {
+                    final int otherEnd = edge.other(node);
+                    dfsOnGraph(nodeAtSameLevel, topoSet, otherEnd, G, count+1);
                 });
 
         topoSet.remove(node);
     }
 
-    private static void topologicalSort(final GraphCreator graph, final int start, final boolean[] visited) {
+    private static void topologicalSort(final GraphCreator G, final int start, final boolean[] visited) {
         if (visited[start]) {
             return;
         }
         visited[start] = true;
-        graph.getNeighbouringNodes(start)
-                .forEach(neighbour -> {
-                    nodeToIncomingEdge.get(neighbour.node).add(start);
-                    if (!visited[neighbour.node]) {
-                        topologicalSort(graph, neighbour.node, visited);
+        G.adj(start)
+                .forEach(edge -> {
+                    final int otherEnd = edge.other(start);
+                    nodeToIncomingEdge.get(otherEnd).add(start);
+                    if (!visited[otherEnd]) {
+                        topologicalSort(G, otherEnd, visited);
                     }
                 });
 
