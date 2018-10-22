@@ -35,8 +35,8 @@ public class Bfs {
         boolean visited[] = new boolean[nodes];
 
         LinkedList<Integer> queue = new LinkedList<>();
-        queue.add(1);
-        visited[1] = true;
+        queue.add(0);
+        visited[0] = true;
 
         while (!queue.isEmpty()) {
             final int node = queue.removeFirst();
