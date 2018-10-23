@@ -27,8 +27,6 @@ public class Restaurant {
     }
 
     public List<Table> search(String query) {
-
-
         return null;
     }
 
