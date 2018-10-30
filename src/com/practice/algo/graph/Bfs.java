@@ -33,8 +33,11 @@ public class Bfs {
         G.addEdge(3, 5, 14);
 
         boolean visited[] = new boolean[nodes];
+        int distance[] = new int[nodes];
+        int parent[] = new int[nodes];
 
         LinkedList<Integer> queue = new LinkedList<>();
+        // Source is 0;
         queue.add(0);
         visited[0] = true;
 
@@ -46,9 +49,24 @@ public class Bfs {
                         if (!visited[otherEnd]) {
                             System.out.println("Neighbours of " + node + " are added ---> " + otherEnd);
                             queue.add(otherEnd);
+                            distance[otherEnd] = distance[node] + 1;
+                            parent[otherEnd] = node;
                             visited[otherEnd] = true;
                         }
                     });
+        }
+
+        for (int i = 0; i < nodes; i++) {
+            System.out.println("Distance from source (0) to " + i + " is : " + distance[i]);
+
+            // Path from i to source.
+            System.out.print("Path from : " + i + "-->");
+            int j = i;
+            while (parent[j] != 0) {
+                System.out.print(parent[j] + "-->");
+                j = parent[j];
+            }
+            System.out.println("0");
         }
 
     }
