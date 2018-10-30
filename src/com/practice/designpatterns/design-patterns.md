@@ -5,6 +5,7 @@
 _recognizeable by behavioral methods which (indirectly) invokes the same method in another implementation of same abstract/interface type in a queue_
 
 > java.util.logging.Logger#log()
+
 > javax.servlet.Filter#doFilter()
 
 
@@ -34,8 +35,11 @@ maybe currently you are using Array, and maybe in future you change it to Linked
 _recognizeable by behavioral methods taking an instance of different abstract/interface type (usually using the command pattern) which delegates/uses the given instance_
 
 > java.util.Timer (all scheduleXXX() methods)
+
 > java.util.concurrent.Executor#execute()
+
 > java.util.concurrent.ExecutorService (the invokeXXX() and submit() methods)
+
 > java.util.concurrent.ScheduledExecutorService (all scheduleXXX() methods)
 
 
@@ -44,7 +48,50 @@ _recognizeable by behavioral methods taking an instance of different abstract/in
 _recognizeable by behavioral methods which invokes a method on an instance of another abstract/interface type, depending on own state_
 
 > All implementations of java.util.EventListener
+
 > javax.servlet.http.HttpSessionBindingListener
+
 > javax.servlet.http.HttpSessionAttributeListener
 
 [Complicated objects situation](https://softwareengineering.stackexchange.com/questions/317164/observer-design-pattern-with-complicated-objects)
+
+
+## STATE
+
+_(recognizeable by behavioral methods which changes its behaviour depending on the instance's state which can be controlled externally_
+
+> javax.faces.lifecycle.LifeCycle#execute() (controlled by FacesServlet, the behaviour is dependent on current phase (state) of JSF lifecycle)
+
+[Who shoudl have the responsibility to change the state, Client or Object ?](https://stackoverflow.com/questions/2105384/what-is-the-best-way-using-the-state-design-pattern-to-change-states)
+
+
+## STRATEGY
+
+_recognizeable by behavioral methods in an abstract/interface type which invokes a method in an implementation of a different abstract/interface type which has been passed-in as method argument into the strategy implementation_
+
+> java.util.Comparator#compare(), executed by among others Collections#sort().
+
+> javax.servlet.http.HttpServlet, the service() and all doXXX() methods take HttpServletRequest and HttpServletResponse and the implementor has to process them (and not to get hold of them as instance variables!).
+
+> javax.servlet.Filter#doFilter()
+
+[Benefits of Strategy Pattern](https://softwareengineering.stackexchange.com/questions/302612/advantages-of-strategy-pattern)
+
+
+## TEMPLATE
+
+_recognizeable by behavioral methods which already have a "default" behaviour defined by an abstract type_
+
+> All non-abstract methods of java.io.InputStream, java.io.OutputStream, java.io.Reader and java.io.Writer.
+
+> All non-abstract methods of java.util.AbstractList, java.util.AbstractSet and java.util.AbstractMap.
+
+> javax.servlet.http.HttpServlet, all the doXXX() methods by default sends a HTTP 405 "Method Not Allowed" error to the response. You're free to implement none or any of them.
+
+[Understand design pattern](https://stackoverflow.com/questions/22015933/understanding-template-method-pattern)
+
+[Where to use template design pattern](https://stackoverflow.com/questions/1553856/where-should-we-use-template-method-pattern)
+
+
+
+
