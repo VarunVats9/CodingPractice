@@ -17,11 +17,11 @@ public class RabinKarp {
         int n = pattern.length();
         int m = text.length();
 
-        long[] base = new long[m+2];
+        long[] base = new long[m+1];
         base[0] = 1;
 
         // Calculate base power.
-        for (int i = 1; i < m; i++) {
+        for (int i = 1; i <= m; i++) {
             base[i] = (base[i-1] * prime) % mod;
         }
 

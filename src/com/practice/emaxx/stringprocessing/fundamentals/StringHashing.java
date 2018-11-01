@@ -48,11 +48,11 @@ public class StringHashing {
         int prime = 31;
         long mod = 100_000_009L; // gcd(prime, mod) = 1.
 
-        long[] base = new long[n+2];
+        long[] base = new long[n+1];
         base[0] = 1;
 
         // Pre-compute all the base with powers.
-        for (int i = 1; i <= n+1; i++) {
+        for (int i = 1; i <= n; i++) {
             base[i] = (base[i-1] * prime) % mod;
         }
 
@@ -79,10 +79,10 @@ public class StringHashing {
          * 2. Second, is this approach make both sides multiplied by same power of base,
          * and then compare both the hashes. (check the reference.)
          *
-         * Multiply both sides by maXPower - i - len + 1.
+         * Multiply both sides by maXPower - i - len + 1. Or with maXPower - i - len - 1.
          * 1. '-i' is important to remove the i dependency.
          * 2. If we do for every length separately, len dependency is also not required.
-         * 3. Left with maXPower - i + 1.
+         * 3. Left with maXPower - i + 1. Or maXPower - i - 1.
          */
 
         int count = 0;
@@ -90,7 +90,7 @@ public class StringHashing {
             Set<Long> set = new HashSet<>();
             for (int j = 0; j <= n - l; j++) {
                 long current_hash = (prefix[j+l] - prefix[j] + mod) % mod;
-                current_hash = (current_hash * base[n-j+1]) % mod;
+                current_hash = (current_hash * base[n-j-1]) % mod;
                 set.add(current_hash);
             }
             count = count + set.size();
