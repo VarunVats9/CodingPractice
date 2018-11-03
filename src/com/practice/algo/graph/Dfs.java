@@ -7,6 +7,8 @@ import com.practice.algo.graph.util.GraphCreator;
  */
 public class Dfs {
 
+    static int dfsTimer = 0;
+
     public static void main(String[] args) {
 
         final int nodes = 9;
@@ -30,25 +32,56 @@ public class Dfs {
         G.addEdge(2, 5, 4);
         G.addEdge(3, 5, 14);
 
-        boolean visited[] = new boolean[nodes];
+
+        // Color 0 : Unvisited, 1: Under visitation, 2: Exit visitation.
+        int color[] = new int[nodes];
+
+        // Edge classification.
+        int[] entry = new int[nodes];
+        int[] exit = new int[nodes];
+
+        /*
+         * Edge Classification:
+         *
+         * 1. Tree Edge : Edge from current node (u) to node (v). Color of v is 0, i.e v is discovered
+         *                for the first time.
+         * 2. Forward Edge : There is a edge(u, v) from current node(u) to descendant(v) of it.
+         *                   entry[u] < entry[v]. And the color of v is 2.
+         * 3. Back Edge : There is a edge(u, v) from current node(u) to ascendant(v) of it.
+         *                entry[u] < entry[v]. And the color of v is 1. [It tells about cycles]
+         * 4. Cross Edge : There is a edge(u, v), where the color of v is 2, and entry[u] > entry[v].
+         *                 Formal definition, quite confusing, which is v is neither a descendant, or
+         *                 ascendant of u.
+         *
+         *
+         * In undirected graphs, we don't have back and cross edge, because in the dfs from u those
+         * were already been discovered.
+         */
+
+        dfsTimer = 0;
 
         for (int i = 0; i < nodes; i++) {
-            if (!visited[i]) {
-                dfs(visited, G, i);
+            if (color[i] == 0) {
+                dfs(color, G, i, entry, exit);
             }
         }
-
     }
 
-    private static void dfs(final boolean[] visited, final GraphCreator G, final int start) {
-        visited[start] = true;
+    private static void dfs(final int[] color, final GraphCreator G, final int start, final int[] entry, final int[] exit) {
+
+        color[start] = 1;
+        entry[start] = dfsTimer++;
+
         G.adj(start)
                 .forEach(edge -> {
                     final int otherEnd = edge.other(start);
-                    if (!visited[otherEnd]) {
-                        System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + otherEnd);
-                        dfs(visited, G, otherEnd);
+                    if (color[otherEnd] == 0) {
+                        System.out.println("Marked node " + start + " as color 1: Under visitation, " + " now going to node ---> " + otherEnd);
+                        dfs(color, G, otherEnd, entry, exit);
                     }
                 });
+
+        color[start] = 2;
+        exit[start] = dfsTimer++;
     }
 }
