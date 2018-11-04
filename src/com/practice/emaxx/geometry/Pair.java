@@ -15,6 +15,11 @@ public class Pair<L, R> {
         this.right = right;
     }
 
+    public Pair(final Pair<L, R> pair) {
+        this.setLeft(pair.left);
+        this.setRight(pair.right);
+    }
+
     public L getLeft() {
         return this.left;
     }
