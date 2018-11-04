@@ -1,7 +1,9 @@
 package com.practice.geeksforgeeks.search;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,13 +62,14 @@ public class AStarSearch {
                 final Pair<Integer, Integer> neighbour = evaluateNeighbour(currentNode, DIRECTIONS[i]);
 
                 // Check if it is possible to add this neighbour.
-                if (!isValidNeighbour(neighbour, grid)) {
+                if (!isValidNeighbour(neighbour, grid) || close.containsKey(neighbour)) {
                     continue;
                 }
 
                 // Neighbour is the dest.
                 if (neighbour.equals(dest)) {
                     updateParent(parent, currentNode, neighbour);
+                    printPathFromDestToSource(source, dest, parent);
                     return;
                 }
 
@@ -93,12 +96,21 @@ public class AStarSearch {
     private static void printPathFromDestToSource(final Pair<Integer, Integer> source, final Pair<Integer, Integer> dest, final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent) {
 
         Pair<Integer, Integer> current = dest;
+        Deque<Pair<Integer, Integer>> stack = new ArrayDeque<>();
 
         while (!parent.get(current).equals(source)) {
-            System.out.println("Going from " + current + "  ---->  " + parent.get(current));
+            stack.addFirst(current);
             current = parent.get(current);
         }
+        stack.addFirst(source);
 
+        while (!stack.isEmpty()) {
+            final Pair<Integer, Integer> top = stack.removeFirst();
+            if (top.equals(dest)) {
+                return;
+            }
+            System.out.println("Going from " + top + "  ---->  " + stack.peekFirst());
+        }
     }
 
     private static void updateParent(final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent, final Pair<Integer, Integer> currentNode, final Pair<Integer, Integer> neighbour) {
