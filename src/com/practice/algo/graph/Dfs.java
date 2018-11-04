@@ -1,5 +1,8 @@
 package com.practice.algo.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.practice.algo.graph.util.GraphCreator;
 
 /**
@@ -11,7 +14,7 @@ public class Dfs {
 
     public static void main(String[] args) {
 
-        final int nodes = 9;
+        final int nodes = 11;
 
         final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
 
@@ -32,6 +35,10 @@ public class Dfs {
         G.addEdge(2, 5, 4);
         G.addEdge(3, 5, 14);
 
+        G.addEdge(9, 10, 5);
+
+        // Connected Components in undirected graph.
+        List<Integer> cc = new ArrayList<>();
 
         // Color 0 : Unvisited, 1: Under visitation, 2: Exit visitation.
         int color[] = new int[nodes];
@@ -62,22 +69,35 @@ public class Dfs {
 
         for (int i = 0; i < nodes; i++) {
             if (color[i] == 0) {
-                dfs(color, G, i, entry, exit);
+                // Clearing the previous connected components list.
+                cc.clear();
+
+                dfs(color, G, i, entry, exit, cc);
+
+                // Print connected components list.
+                System.out.print("Connected Components elements: ");
+                for (int j = 0; j < cc.size(); j++) {
+                    System.out.print(cc.get(j) + " ");
+                }
+                System.out.println("\n-------------------------------");
             }
         }
     }
 
-    private static void dfs(final int[] color, final GraphCreator G, final int start, final int[] entry, final int[] exit) {
+    private static void dfs(final int[] color, final GraphCreator G, final int start, final int[] entry, final int[] exit, final List<Integer> cc) {
 
         color[start] = 1;
         entry[start] = dfsTimer++;
+
+        // Adding into connected components.
+        cc.add(start);
 
         G.adj(start)
                 .forEach(edge -> {
                     final int otherEnd = edge.other(start);
                     if (color[otherEnd] == 0) {
-                        System.out.println("Marked node " + start + " as color 1: Under visitation, " + " now going to node ---> " + otherEnd);
-                        dfs(color, G, otherEnd, entry, exit);
+                        System.out.println("Marked node " + start + " as color 1: Under visitation," + " now going to node ---> " + otherEnd);
+                        dfs(color, G, otherEnd, entry, exit, cc);
                     }
                 });
 

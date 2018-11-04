@@ -23,6 +23,14 @@ public class Pair<L, R> {
         return this.right;
     }
 
+    public void setLeft(final L left) {
+        this.left = left;
+    }
+
+    public void setRight(final R right) {
+        this.right = right;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
