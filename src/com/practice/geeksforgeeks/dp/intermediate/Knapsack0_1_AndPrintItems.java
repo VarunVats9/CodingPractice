@@ -1,16 +1,11 @@
 package com.practice.geeksforgeeks.dp.intermediate;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-
 /**
  * Created by vvats on 06/11/18.
  */
 public class Knapsack0_1_AndPrintItems {
 
-
-    public static int knapSack(final int[] weight, final int[] values, final int limit) {
+    private static void knapSack(final int[] weight, final int[] values, final int limit) {
 
         int n = weight.length;
 
@@ -54,18 +49,36 @@ public class Knapsack0_1_AndPrintItems {
             if (dp[i][col] == dp[i-1][col]) {
                 continue;
             }
-            //stack.addFirst(weight[i-1]);
             System.out.print(weight[i-1] + " ");
             col = col - weight[i-1];
         }
 
         System.out.println("\nMaximum value that can be achieved : " + dp[n][limit] + "\n");
-
-        return dp[n][limit];
     }
 
+    private static void unboundedKnapSack(final int[] weight, final int[] values, final int limit) {
 
+        int n = weight.length;
 
+        int[] dp = new int[limit+1];
+
+        for (int i = 0; i <= limit; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i < 1 || j < 1) {
+                    continue;
+                }
+                if (weight[j-1] <= i) {
+
+                    /*
+                     * dp[i], it means max value that limit i can achieve.
+                     */
+                    dp[i] = Math.max(dp[i], values[j - 1] + dp[i - weight[j - 1]]);
+                }
+            }
+        }
+
+        System.out.println("Maximum value that can be achieved in unbounded: " + dp[limit]);
+    }
 
     public static void main(String[] args) {
 
@@ -77,13 +90,14 @@ public class Knapsack0_1_AndPrintItems {
             Knapsack0_1_AndPrintItems.knapSack(new int[]{3, 8, 6}, new int[]{7, 8, 4}, 10);
         }
 
+        {
+            Knapsack0_1_AndPrintItems.unboundedKnapSack(new int[]{10, 20, 30}, new int[]{60, 100, 120}, 50);
+        }
 
+        {
+            Knapsack0_1_AndPrintItems.unboundedKnapSack(new int[]{3, 8, 6}, new int[]{7, 8, 4}, 10);
+        }
 
     }
-
-
-
-
-
 
 }
