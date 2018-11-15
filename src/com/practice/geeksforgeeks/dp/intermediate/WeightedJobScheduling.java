@@ -16,16 +16,23 @@ public class WeightedJobScheduling {
 
         jobs.sort(Comparator.comparing(Job::getStart));
 
+        // dp[i], it means that till ith position, it stores the maximum profit earned.
         int[] dp = new int[n+1];
 
         int maxProfit = 0;
 
+        // Profit for each job, is its current position value.
         for (int j = 1; j <= n; j++) {
             dp[j] = jobs.get(j-1).profit;
         }
 
         for (int i = 1; i <= n; i++) {
             for (int j = i+1; j <= n; j++) {
+                /*
+                 * Variation of LIS, since both jobs cannot overlap, need to check the finish of first
+                 * is less than start of second. And, while calculating the profit for a particular position,
+                 * if the profit comes out to be more than the previous stored value, we update.
+                 */
                 if (jobs.get(j-1).start >= jobs.get(i-1).finish && dp[j] < dp[i] + jobs.get(j-1).profit) {
                     dp[j] = dp[i] + jobs.get(j-1).profit;
                     maxProfit = Math.max(maxProfit, dp[j]);
