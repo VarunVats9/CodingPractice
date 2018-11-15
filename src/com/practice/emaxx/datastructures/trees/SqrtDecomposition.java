@@ -7,6 +7,8 @@ public class SqrtDecomposition {
 
     // Total blocks.
     static int[] b;
+
+    // Each block size.
     static int s;
 
     private static void decomposition(final int[] a) {
@@ -90,7 +92,24 @@ public class SqrtDecomposition {
         System.out.println("Total sum between zero based index, l : " + l +  " and r : " + r + " is : " + sum);
     }
 
+    /*
+     * Mo's Algorithm.
+     */
+    private static void mo_algorithm() {
 
+
+
+
+    }
+
+    private class Query {
+        int l, r, idx;
+
+        public Query(final int l, final int r) {
+            this.l = l;
+            this.r = r;
+        }
+    }
 
     public static void main(String[] args) {
 

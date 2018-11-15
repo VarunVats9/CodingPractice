@@ -47,10 +47,11 @@ public class LIS {
          * 2. Maximum Sum Increasing Sub-sequence.
          * 3. The Longest Chain.
          * 4. Box Stacking.
+         * 5. Weighted Job Scheduling.
          */
 
         {
-            //LIS.buildingBridges(new int[]{10, 22, 9, 33, 21, 50, 41, 60});
+            //LIS.buildingBridges(); Check intermediate package.
         }
 
         {
@@ -82,7 +83,11 @@ public class LIS {
         }
 
         {
-            //LIS.boxStacking(new int[]{10, 22, 9, 33, 21, 50, 41, 60});
+            //LIS.boxStacking(); Check intermediate package.
+        }
+
+        {
+            //LIS.weightedJobScheduling(); Check intermediate package.
         }
 
     }
