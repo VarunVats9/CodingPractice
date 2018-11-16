@@ -69,6 +69,10 @@ public class WildcardMatching {
     public static void main(String[] args) {
 
         {
+            WildcardMatching.match("aaabb", "a*b");
+        }
+
+        {
             WildcardMatching.match("baaabab", "*****ba*****ab");
         }
 

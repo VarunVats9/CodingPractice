@@ -1,5 +1,8 @@
 package com.practice.emaxx.datastructures.trees;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by vvats on 13/11/18.
  */
@@ -10,6 +13,10 @@ public class SqrtDecomposition {
 
     // Each block size.
     static int s;
+
+    static int result = 0;
+
+    static int[] cnt;
 
     private static void decomposition(final int[] a) {
 
@@ -94,20 +101,80 @@ public class SqrtDecomposition {
 
     /*
      * Mo's Algorithm.
+     *
+     * 1. It works in offline mode : that is all the queries need to be known beforehand.
+     * 2. Array is not changed by queries.
      */
-    private static void mo_algorithm() {
+    private static void mo_algorithm(final List<Query> queries, final int[] a) {
 
+        s = (int)(Math.sqrt(a.length) + 1);
 
+        cnt = new int[1000_002];
 
+        queries.sort((o1, o2) -> {
+            Double c = o1.l * 1.0 / s;
+            Double d = o2.l * 1.0 / s;
+            if (c.equals(d)) {
+                return o1.getR().compareTo(o2.getR());
+            }
+            return c.compareTo(d);
+        });
+
+        int c_l = 0;
+        int c_r = -1;
+
+        for (Query query : queries) {
+
+            while (c_l > query.l) {
+                add(--c_l, a);
+            }
+
+            while (c_l < query.l) {
+                remove(c_l++, a);
+            }
+
+            while (c_r > query.r) {
+                remove(c_r--, a);
+            }
+
+            while (c_r < query.r) {
+                add(++c_r, a);
+            }
+
+            System.out.println("Answer for query number : " + query.q_idx + " is : " + getAnswer());
+        }
 
     }
 
-    private class Query {
-        int l, r, idx;
+    private static int getAnswer() {
+        return result;
+    }
 
-        public Query(final int l, final int r) {
+    private static void remove(final int idx, final int[] a) {
+        cnt[a[idx]]--;
+        if (cnt[a[idx]] == 2) {
+            result--;
+        }
+    }
+
+    private static void add(final int idx, final int[] a) {
+        cnt[a[idx]]++;
+        if (cnt[a[idx]] == 3) {
+            result++;
+        }
+    }
+
+    public static class Query {
+        int l, r, q_idx;
+
+        public Query(final int l, final int r, final int q_idx) {
             this.l = l;
             this.r = r;
+            this.q_idx = q_idx;
+        }
+
+        public Integer getR() {
+            return this.r;
         }
     }
 
@@ -117,6 +184,14 @@ public class SqrtDecomposition {
             int[] a = new int[]{1, 2, 3, 4, 5, 6, 7};
             SqrtDecomposition.decomposition(a);
             SqrtDecomposition.sumQuery(2, 6, a);
+        }
+
+        {
+            // Distinct elements between l and r, which are repeated at least three times.
+            int[] a = new int[]{0, 1, 1, 0, 2, 3, 4, 1, 3, 5, 1, 5, 3, 5, 4, 0, 2, 2};
+            final List<Query> queries = Arrays.asList(new Query(0, 8, 1), new Query(2, 5, 2), new Query(2, 10, 3),
+                    new Query(16, 17, 4), new Query(13, 14, 5), new Query(1, 17, 6), new Query(17, 17, 7));
+            SqrtDecomposition.mo_algorithm(queries, a);
         }
 
     }
