@@ -125,18 +125,38 @@ public class SqrtDecomposition {
 
         for (Query query : queries) {
 
+            /*
+             * Suppose, c_l is 3, and query.l is 2. And we already have, c_l calculated.
+             * Now, have to decrease c_l (3 --> 2), and add that value to result. But, result for idx 3
+             * we already have, hence --cl first, and then call add().
+             */
             while (c_l > query.l) {
                 add(--c_l, a);
             }
 
+            /*
+             * Suppose, c_l is 3, and query.l is 4. And we already have, c_l calculated.
+             * Now, have to increase c_l (3 --> 4), and remove that value from result. But, result for idx 3
+             * we already have, hence cl++ first, and then call remove().
+             */
             while (c_l < query.l) {
                 remove(c_l++, a);
             }
 
+            /*
+             * Suppose, c_r is 3, and query.r is 2. And we already have, c_r calculated.
+             * Now, have to decrease c_r (3 --> 2), and remove that value from result. But, result for idx 3
+             * we already have, hence cr-- first, and then call remove().
+             */
             while (c_r > query.r) {
                 remove(c_r--, a);
             }
 
+            /*
+             * Suppose, c_r is 3, and query.r is 4. And we already have, c_r calculated.
+             * Now, have to increase c_r (3 --> 4), and add that value to result. But, result for idx 3
+             * we already have, hence ++cr first, and then call add().
+             */
             while (c_r < query.r) {
                 add(++c_r, a);
             }
