@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.omg.CORBA.INTERNAL;
 
 /**
  * This data structure is used in creating priority queue.
