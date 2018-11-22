@@ -8,6 +8,8 @@ package com.practice.emaxx.algebra.fundamentals;
  */
 public class BinaryExponentiation {
 
+    final static int MOD = 1_000_000_009;
+
     private static long binaryPowRecur(long a, long b) {
 
         if (b == 0) return 1;
@@ -61,6 +63,28 @@ public class BinaryExponentiation {
         return res;
     }
 
+    private static long binaryPowMod(long a, long b, long mod) {
+
+        a = a % mod;
+
+        long res = 1;
+
+        while (b > 0) {
+
+            // check least significant bit.
+            if ((b & 1) > 0) {
+                res = (res * a) % mod;
+            }
+
+            a = (a * a) % mod;
+
+            // Shift by one.
+            b = b >> 1;
+        }
+
+        return res;
+    }
+
 
     public static void main(String[] args) {
 
@@ -87,6 +111,15 @@ public class BinaryExponentiation {
         {
             System.out.println(BinaryExponentiation.binaryPow(2890, 5));
         }
+
+        {
+            System.out.println(BinaryExponentiation.binaryPowMod(2890, 53411134, MOD));
+        }
+
+        {
+            System.out.println(BinaryExponentiation.binaryPowMod(289124410, 971726478, MOD));
+        }
+
     }
 
 }
