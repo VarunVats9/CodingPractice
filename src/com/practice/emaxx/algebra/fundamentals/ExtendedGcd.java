@@ -39,7 +39,7 @@ public class ExtendedGcd {
      * Similarly, we can get x1, y1 from x2, y2 by applying equation (3).
      * And, we can get x, y from x1, y1 by applying equation(3).
      */
-    private static int extendGcd(final int a, final int b, final int[] coeff) {
+    public static int extendGcd(final int a, final int b, final int[] coeff) {
         if (b == 0) {
             coeff[0] = 1; coeff[1] = 0;
             return a;
