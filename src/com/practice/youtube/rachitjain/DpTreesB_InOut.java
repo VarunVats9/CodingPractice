@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author : Varun Vats (varunvats32@gmail.com)
  */
-public class DpTreesB {
+public class DpTreesB_InOut {
 
 
     /*
@@ -132,7 +132,7 @@ public class DpTreesB {
             g[7].add(9); g[9].add(7);
             g[7].add(10); g[10].add(7);
 
-            DpTreesB.nodeHeightTree(g, nodes);
+            DpTreesB_InOut.nodeHeightTree(g, nodes);
         }
 
     }

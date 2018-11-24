@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author : Varun Vats (varunvats32@gmail.com)
  */
-public class DpTreesA {
+public class DpTreesA_Basic {
 
     /*
      * Reference Youtube : https://www.youtube.com/watch?v=gm4Ye0fESpU
@@ -77,7 +77,7 @@ public class DpTreesA {
             g[7].add(13); g[13].add(7);
             g[7].add(14); g[14].add(7);
 
-            DpTreesA.treeSum(g, weight, nodes);
+            DpTreesA_Basic.treeSum(g, weight, nodes);
         }
     }
 
