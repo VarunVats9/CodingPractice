@@ -1,4 +1,4 @@
 # Todo List
 
-- [  ] Mercury
-- [ X] Venus
+- [  ] KickStart 2018
+- [  ] GeeksForGeeks DP
