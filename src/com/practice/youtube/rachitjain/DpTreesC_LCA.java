@@ -11,14 +11,32 @@ import java.util.List;
  */
 public class DpTreesC_LCA {
 
+    private static int[][] dp;
 
     private static void lca(final List<Integer>[] g, final int a, final int b, final int nodes) {
 
-        int[][] dp = new int[nodes+1][];
+        int lg = (int)Math.log(nodes);
+        dp = new int[nodes+1][lg+1];
+        int[] lvl = new int[nodes+1];
+
+        dfs(lvl, g, 1, 0);
 
 
     }
 
+    private static void dfs(final int[] lvl, final List<Integer>[] g, final int curr, final int parent) {
+
+        lvl[curr] = 1 + lvl[parent];
+        dp[curr][0] = parent;
+
+        for (int i = 0; i < g[curr].size(); i++) {
+            int child = g[curr].get(i);
+            if (child == parent) {
+                continue;
+            }
+            dfs(lvl, g, child, curr);
+        }
+    }
 
 
     public static void main(String[] args) {
