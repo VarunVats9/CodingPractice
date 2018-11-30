@@ -49,7 +49,7 @@ public class Bfs_0_1_Graph {
 
             G.adj(vertex)
                     .forEach(edge -> {
-                        final int other = edge.other(vertex);
+                        final int other = edge.destination(vertex);
                         if (distance[other] > distance[vertex] + edge.getWeight()) {
                             distance[other] = distance[vertex] + (int)edge.getWeight();
                             if (edge.getWeight() == 0) {

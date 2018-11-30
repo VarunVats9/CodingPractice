@@ -56,10 +56,9 @@ public class Gcd {
     private static int gcd(int a, int b) {
 
         while (b > 0) {
-            a = a % b;
-            int temp = a;
-            a = b;
-            b = temp;
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
 
         return a;

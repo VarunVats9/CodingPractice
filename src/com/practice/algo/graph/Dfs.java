@@ -55,7 +55,7 @@ public class Dfs {
          * 2. Forward Edge : There is a edge(u, v) from current node(u) to descendant(v) of it.
          *                   entry[u] < entry[v]. And the color of v is 2.
          * 3. Back Edge : There is a edge(u, v) from current node(u) to ascendant(v) of it.
-         *                entry[u] < entry[v]. And the color of v is 1. [It tells about cycles]
+         *                entry[u] > entry[v]. And the color of v is 1. [It tells about cycles]
          * 4. Cross Edge : There is a edge(u, v), where the color of v is 2, and entry[u] > entry[v].
          *                 Formal definition, quite confusing, which is v is neither a descendant, or
          *                 ascendant of u.
@@ -94,7 +94,7 @@ public class Dfs {
 
         G.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     if (color[otherEnd] == 0) {
                         System.out.println("Marked node " + start + " as color 1: Under visitation," + " now going to node ---> " + otherEnd);
                         dfs(color, G, otherEnd, entry, exit, cc);

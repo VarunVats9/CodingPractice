@@ -46,7 +46,7 @@ public class BellmondFordSP {
                 final int start = j;
                 G.adj(start)
                         .forEach(edge -> {
-                            final int otherEnd = edge.other(start);
+                            final int otherEnd = edge.destination(start);
                             dp[otherEnd] = Math.min(dp[start] + edge.getWeight(), dp[otherEnd]);
                         });
             }
@@ -59,7 +59,7 @@ public class BellmondFordSP {
             final int start = j;
             G.adj(start)
                     .forEach(edge -> {
-                        final int otherEnd = edge.other(start);
+                        final int otherEnd = edge.destination(start);
                         if (dp[start] + edge.getWeight() < dp[otherEnd]) {
                             System.out.println("Negative edge cycle is present");
                             isNegativeCyclePresent = true;

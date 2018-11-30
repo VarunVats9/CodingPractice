@@ -45,7 +45,7 @@ public class Bfs {
             final int node = queue.removeFirst();
             G.adj(node)
                     .forEach(edge -> {
-                        final int otherEnd = edge.other(node);
+                        final int otherEnd = edge.destination(node);
                         if (!visited[otherEnd]) {
                             System.out.println("Neighbours of " + node + " are added ---> " + otherEnd);
                             queue.add(otherEnd);

@@ -56,7 +56,7 @@ public class ArticulatePoint {
 
         G.adj(start)
                 .forEach(edge -> {
-                    final int adj = edge.other(start);
+                    final int adj = edge.destination(start);
 
                     // All the unvisited neighbours (parent would have already been visited)
                     if (!visited[adj]) {

@@ -8,8 +8,6 @@ package com.practice.emaxx.algebra.fundamentals;
  */
 public class ExtendedGcd {
 
-    //tatic int x, y;
-
     /*
      * This algorithm, computes the gcd in the form of a, b itself.
      *

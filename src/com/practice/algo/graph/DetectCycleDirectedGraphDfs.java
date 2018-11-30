@@ -40,7 +40,7 @@ public class DetectCycleDirectedGraphDfs {
         parentSet.add(start);
         G.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     if (parentSet.contains(otherEnd)) {
                         System.out.println("Found a back edge from " + start + " ----> " + otherEnd);
                         return;

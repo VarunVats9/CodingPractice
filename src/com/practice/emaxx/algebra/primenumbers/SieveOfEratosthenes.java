@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class SieveOfEratosthenes {
 
-    private static final int BLOCK_SIZE = 10;//10000;
+    // Block size, should be set accordingly, based on your inputs.
+    private static final int BLOCK_SIZE = 10;
 
     private static final List<Integer> primes = new ArrayList<>();
 
@@ -21,8 +22,10 @@ public class SieveOfEratosthenes {
 
         boolean[] notPrime = new boolean[n+1];
 
-        // 1 is not a prime number, a prime number is a positive number divisible by itself and 1, that is
-        // it should have exactly two positive divisors.
+        /*
+         * 1 is not a prime number, a prime number is a positive number divisible by itself and 1, that is
+         * it should have exactly two positive divisors.
+         */
         notPrime[0] = notPrime[1] = true;
 
         /*

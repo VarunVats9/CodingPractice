@@ -84,7 +84,7 @@ public class TopologicalSortParallelScheduler {
 
         G.adj(node)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(node);
+                    final int otherEnd = edge.destination(node);
                     dfsOnGraph(nodeAtSameLevel, topoSet, otherEnd, G, count+1);
                 });
 
@@ -98,7 +98,7 @@ public class TopologicalSortParallelScheduler {
         visited[start] = true;
         G.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     nodeToIncomingEdge.get(otherEnd).add(start);
                     if (!visited[otherEnd]) {
                         topologicalSort(G, otherEnd, visited);

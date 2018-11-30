@@ -14,11 +14,11 @@ public class Edge implements Comparable<Edge> {
         this.weight = weight;
     }
 
-    public int either() {
+    public int source() {
         return this.v;
     }
 
-    public int other(final int vertex) {
+    public int destination(final int vertex) {
         if (vertex == v) return w;
         return v;
     }

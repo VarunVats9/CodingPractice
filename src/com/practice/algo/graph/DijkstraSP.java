@@ -1,7 +1,6 @@
 package com.practice.algo.graph;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -55,8 +54,8 @@ public class DijkstraSP {
 
             final Edge topEdge = queue.poll();
 
-            final int currentVertex = topEdge.either();
-            final int otherVertex = topEdge.other(currentVertex);
+            final int currentVertex = topEdge.source();
+            final int otherVertex = topEdge.destination(currentVertex);
             int vertexDest = currentVertex;
             int vertexSrc = otherVertex;
 
@@ -81,7 +80,7 @@ public class DijkstraSP {
             final int finalVertexDest = vertexDest;
             G.adj(vertexDest)
                     .forEach(edge -> {
-                        final int otherEnd = edge.other(finalVertexDest);
+                        final int otherEnd = edge.destination(finalVertexDest);
                         queue.add(new Edge(finalVertexDest, otherEnd, edge.getWeight() + weightOfNode));
                     });
 

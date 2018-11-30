@@ -63,7 +63,7 @@ public class GraphCreator {
             final int start = i;
             this.adj(start)
                     .forEach(edge -> {
-                        newGraph.addEdge(edge.other(start), start);
+                        newGraph.addEdge(edge.destination(start), start);
                     });
         }
         return newGraph;

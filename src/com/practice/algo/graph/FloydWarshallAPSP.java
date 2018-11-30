@@ -33,7 +33,7 @@ public class FloydWarshallAPSP {
             final int vertex = i;
             final Map<Integer, Double> neighbours = G.adj(vertex)
                     .stream()
-                    .collect(Collectors.toMap(e -> e.other(vertex), e -> e.getWeight()));
+                    .collect(Collectors.toMap(e -> e.destination(vertex), e -> e.getWeight()));
             for (int j = 0; j < nodes; j++) {
                 if (i == j) {
                     dp[i][j] = 0;

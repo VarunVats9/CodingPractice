@@ -59,7 +59,7 @@ public class KosarajuSCC {
         visited[start] = true;
         G.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     if (!visited[otherEnd]) {
                         System.out.println("Marked node " + start + " as visited, " + " now going to node ---> " + otherEnd);
                         dfs(visited, G, otherEnd, stack);
@@ -74,7 +74,7 @@ public class KosarajuSCC {
         System.out.println("Part of SCC #" + number + " node is ---------> " + start);
         G.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     if (!visited[otherEnd]) {
                         dfs(visited, G, otherEnd, number);
                     }

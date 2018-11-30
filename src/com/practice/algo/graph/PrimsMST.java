@@ -1,22 +1,34 @@
 package com.practice.algo.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import com.practice.algo.graph.util.Edge;
 import com.practice.algo.graph.util.GraphCreator;
 
 /**
- * Created by vvats on 26/09/18.
+ * Date : 26 Sept, 2018
+ * Time : 10:37 AM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
-// MINIMUM SPANNING TREE
 public class PrimsMST {
-
-    // Cycle detection is not required in Prims, unlike Kruskal, because here every time we add unique new node in the MST.
 
     public static void main(String[] args) {
 
+        /*
+         * MINIMUM SPANNING TREE :
+         *
+         * Prims -> Node
+         * Kruskal -> Edge
+         *
+         * In Prims, we subsequently add a unique node to a set, till it has all the nodes.
+         * The edge with the least weight is added, each time.
+         *
+         * Cycle detection is not required in Prims, unlike Kruskal,
+         * because here every time we add unique new node in the MST.
+         */
         final int nodes = 9;
 
         final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.UNDIRECTED);
@@ -42,35 +54,41 @@ public class PrimsMST {
 
         PriorityQueue<Edge> minHeap = new PriorityQueue<Edge>();
 
-        List<Integer> nodesAddedToGraph = new ArrayList<>();
-        nodesAddedToGraph.add(1);
+        // Set of Nodes
+        Set<Integer> nodeSet = new HashSet<>();
+
+        // Mark the source as visited.
         visited[1] = true;
         System.out.println("Added Edge " + 1 + " with weight " + 0);
 
+        // Add all the destination nodes / neighbours, of the node '1'.
         minHeap.addAll(G.adj(1));
 
-        while (nodesAddedToGraph.size() != nodes) {
+        // Add this source to the set.
+        nodeSet.add(1);
+
+        while (nodeSet.size() != nodes) {
 
             final Edge topEdge = minHeap.poll();
 
-            final int currentVertex = topEdge.either();
-            final int otherVertex = topEdge.other(currentVertex);
-            int vertexDest = currentVertex;
-            int vertexSrc = otherVertex;
+            final int src = topEdge.source();
+            final int dest = topEdge.destination(src);
 
-            if (visited[currentVertex] && visited[otherVertex]) {
-                continue;
-            }
+            int newSource = dest;
 
-            if (visited[currentVertex]) {
-                vertexDest = otherVertex;
-                vertexSrc = currentVertex;
-            }
+            // Check if this new source / neighbour has already been visited.
+            if (visited[newSource]) continue;
 
-            minHeap.addAll(G.adj(vertexDest));
-            visited[vertexDest] = true;
-            nodesAddedToGraph.add(vertexDest);
-            System.out.println("Added Edge " + vertexSrc + "  -----> " + vertexDest + " with weight " + topEdge.getWeight());
+            // Mark the source as visited.
+            visited[newSource] = true;
+
+            // Add all the destination nodes / neighbours
+            minHeap.addAll(G.adj(newSource));
+
+            // Add this new source to the set.
+            nodeSet.add(newSource);
+
+            System.out.println("Added Edge " + src + "  -----> " + newSource + " with weight " + topEdge.getWeight());
         }
 
     }

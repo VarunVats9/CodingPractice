@@ -5,15 +5,24 @@ import java.util.Stack;
 import com.practice.algo.graph.util.GraphCreator;
 
 /**
- * Created by vvats on 28/09/18.
+ * Date : 28 Sept, 2018
+ * Time : 15:37 PM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
-// ORDER OF INDEPENDENT TASKS.
 public class TopologicalSort {
 
     public static Stack<Integer> stack = new Stack<>();
 
     public static void main(String[] args) {
 
+        /*
+         * ORDER OF INDEPENDENT TASKS :
+         *
+         * Topological sorting means, that if a directed edge is there from U -> V, then
+         * in the topological sorting order, U should come before V, i.e. U has to be completed
+         * before V Or V is dependent on U.
+         */
         final int nodes = 6;
 
         final GraphCreator G = new GraphCreator(nodes, GraphCreator.Graph.DIRECTED);
@@ -35,7 +44,7 @@ public class TopologicalSort {
         }
 
         while (!stack.isEmpty()) {
-            System.out.println(" Popping out from stack ----> " + stack.pop());
+            System.out.println(" Popping out from stack in the order of independent tasks(node) till now ----> " + stack.pop());
         }
     }
 
@@ -43,7 +52,7 @@ public class TopologicalSort {
         visited[start] = true;
         graph.adj(start)
                 .forEach(edge -> {
-                    final int otherEnd = edge.other(start);
+                    final int otherEnd = edge.destination(start);
                     if (!visited[otherEnd]) {
                         dfs(visited, graph, otherEnd);
                     }
