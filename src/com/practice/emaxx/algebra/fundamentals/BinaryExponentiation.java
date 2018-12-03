@@ -51,6 +51,12 @@ public class BinaryExponentiation {
 
             // check least significant bit.
             if ((b & 1) > 0) {
+
+                /*
+                 * This 'a' here, is actually not the 'a' mentioned in the parameter.
+                 * Here, it represents, the pow of 'a' formed by multiplying a * a, each time
+                 * in line 63. Here, it can be a^1 or a^2 or a^4 ..... a^2*n and so on.
+                 */
                 res = res * a;
             }
 
