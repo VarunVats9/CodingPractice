@@ -1,9 +1,6 @@
-package com.practice.hackerrank;
+package com.practice.hackerrank.interviewpreparationkit.arrays;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javafx.util.Pair;
@@ -14,8 +11,13 @@ import javafx.util.Pair;
  *
  * @author : Varun Vats (varunvats32@gmail.com)
  */
-public class InterviewPreparationKit {
+public class Arrays {
 
+    /*
+     * Question : Calculate the maximum sum, over the array from 1 to n.
+     * Given that queries of the following form has taken place on this array.
+     * On range [a, b] : Add k to each value.
+     */
     static long arrayManipulation(int n, int[][] queries) {
         List<Pair<Integer, Integer>> list = new ArrayList<>();
         for (int i = 0; i < queries.length; i++) {
@@ -46,6 +48,9 @@ public class InterviewPreparationKit {
         return max;
     }
 
+    /*
+     * Question : Rotate the array by d values.
+     */
     static int[] rotLeft(int[] a, int d) {
         int n = a.length;
         d = d % n;
@@ -68,12 +73,11 @@ public class InterviewPreparationKit {
         }
     }
 
-
     public static void main(String[] args) {
 
-        InterviewPreparationKit.arrayManipulation(4, new int[][]{{2,3,603}, {1,1,286}, {4,4,882}});
+        Arrays.arrayManipulation(4, new int[][]{{2,3,603}, {1,1,286}, {4,4,882}});
 
-        InterviewPreparationKit.rotLeft(new int[]{1,2,3,4,5}, 3);
+        Arrays.rotLeft(new int[]{1,2,3,4,5}, 3);
 
     }
 }
