@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * This data structure is used in creating priority queue.
  * Mostly for dijkstra's algorithms, and prim's algorithms.
@@ -15,7 +14,6 @@ public class BinaryMinHeap<T extends Comparable<T>> {
 
     private List<T> array = new ArrayList<T>();
     private Map<T, Integer> pos = new HashMap<>();
-
 
     public void buildHeap(List<T> array) {
         this.array = array;
@@ -26,7 +24,6 @@ public class BinaryMinHeap<T extends Comparable<T>> {
          * There is no point running heapify on it. Those are one node heap.
          * Hence, running only from floor(n/2), floor(n/2)-1, ... 1.
          */
-
         for (int i = (int)Math.floor(size/2); i >= 0; i--) {
             percolateDown(i);
         }

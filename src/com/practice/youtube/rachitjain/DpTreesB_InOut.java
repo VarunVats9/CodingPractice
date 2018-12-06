@@ -11,13 +11,11 @@ import java.util.List;
  */
 public class DpTreesB_InOut {
 
-
     /*
      * Reference Youtube : https://www.youtube.com/watch?v=Xng1Od_v6Ug
      *
      * In this question, we need to find the height of the tree, considering each node as root,
      * one by one.
-     *
      *
      * Recurrence rule :
      *
@@ -29,7 +27,6 @@ public class DpTreesB_InOut {
 
         int[] visA = new int[nodes+1];
         int[] visB = new int[nodes+1];
-
 
         // in[i], it means the maximum height from root 'i' to any of the leaf in that sub tree of 'i'.
         int[] in = new int[nodes+1];
@@ -80,7 +77,6 @@ public class DpTreesB_InOut {
                 if (in[child] == max) {
                     max = mx2;
                 }
-
                 out[child] = 1 + Math.max(out[curr], 1 + max);
                 dfsB(g, in, out, vis, child);
             }
@@ -100,7 +96,6 @@ public class DpTreesB_InOut {
             int child = g[curr].get(i);
             if (vis[child] == 0) {
                 dfsA(g, in, vis, child);
-
                 // Calculate the maximum subtree height out of all the children.
                 max = Math.max(max, 1 + in[child]);
             }

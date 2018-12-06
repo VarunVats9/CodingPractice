@@ -13,7 +13,10 @@ import java.util.Queue;
 import com.practice.emaxx.geometry.Pair;
 
 /**
- * Created by vvats on 04/11/18.
+ * Date : 04 Nov, 2018
+ * Time : 6:18 PM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
 public class AStarSearch {
 
@@ -29,6 +32,26 @@ public class AStarSearch {
 
     private static void search(final Pair<Integer, Integer> source, final Pair<Integer, Integer> dest, final int[][] grid) {
 
+        /*
+         * The algorithm, is kind of clever approach to solve a problem of finding the distance from
+         * source to destination.
+         *
+         * We already know, DFS approach, but in this we keep track of distance from destination and source,
+         * so that we know, we are finding in correct direction, and not going in random directions.
+         *
+         * 1. We keep two data structures, open (queue) and close (map)
+         * 2. Few parameters, g : distance from source to parent cell, h : distance from destination to current cell.
+         * 3. Open keeps the increasing order of 'f', for each cell (i,j), which we have visited.
+         * 4. Cells already been visited, goes to close list.
+         *
+         * Algorithm goes something like this :
+         * 1. Start with source (parent), and add all the neighbours' (current cell) with their 'f' values to open list.
+         * 2. Every time remove the first cell from the open queue. If it is already present in close map, then continue.
+         * 3. Again get all the neighbours, if there are cells, which are already there in open list but haven't been
+         * visited, then check if it's f value can be improved, if so then update it.
+         * 4. Update the parent once the current cell has been updated.
+         */
+
         // Open and close list.
         Queue<Pair<Pair<Integer, Integer>, Double>> open = new PriorityQueue<>(Comparator.comparingDouble(Pair::getRight));
 
@@ -38,7 +61,7 @@ public class AStarSearch {
         Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent = new HashMap<>();
 
         // Adding source into the open list.
-        open.add(new Pair<Pair<Integer, Integer>, Double>(source, 0.0));
+        open.add(new Pair<>(source, 0.0));
 
         while (!open.isEmpty()) {
 
@@ -71,7 +94,7 @@ public class AStarSearch {
                     return;
                 }
 
-                final Double neighbourF = calculateF(neighbour, dest, currentNode);
+                final Double neighbourF = calculateF(source, neighbour, dest, currentNode);
                 final Double ifNeighbourAlreadyInOpen = findInOpen(neighbour, open);
 
                 // If the neighbour is valid and not there in open list, then add it || if it is doing better.
@@ -88,19 +111,22 @@ public class AStarSearch {
             }
         }
 
-        printPathFromDestToSource(source, dest, parent);
+        System.out.println("No path is found between source and destination.");
     }
 
-    private static void printPathFromDestToSource(final Pair<Integer, Integer> source, final Pair<Integer, Integer> dest, final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent) {
-
+    private static void printPathFromDestToSource(final Pair<Integer, Integer> source,
+            final Pair<Integer, Integer> dest, final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent) {
         Pair<Integer, Integer> current = dest;
         Deque<Pair<Integer, Integer>> stack = new ArrayDeque<>();
+        stack.addFirst(current);
 
-        while (!parent.get(current).equals(source)) {
-            stack.addFirst(current);
+        while (true) {
             current = parent.get(current);
+            stack.addFirst(current);
+            if (current.equals(source)) {
+                break;
+            }
         }
-        stack.addFirst(source);
 
         while (!stack.isEmpty()) {
             final Pair<Integer, Integer> top = stack.removeFirst();
@@ -111,16 +137,16 @@ public class AStarSearch {
         }
     }
 
-    private static void updateParent(final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent, final Pair<Integer, Integer> currentNode, final Pair<Integer, Integer> neighbour) {
+    private static void updateParent(final Map<Pair<Integer, Integer>, Pair<Integer, Integer>> parent,
+            final Pair<Integer, Integer> currentNode, final Pair<Integer, Integer> neighbour) {
         if (parent.containsKey(neighbour)) {
             parent.put(neighbour, currentNode);
         } else {
-            parent.put(neighbour, new Pair<Integer, Integer>(currentNode));
+            parent.put(neighbour, new Pair<>(currentNode));
         }
     }
 
     private static Double findInOpen(final Pair<Integer, Integer> neighbour, final Queue<Pair<Pair<Integer, Integer>, Double>> open) {
-
         final Optional<Pair<Pair<Integer, Integer>, Double>> any = open.stream()
                 .filter(e -> e.getLeft().equals(neighbour))
                 .findAny();
@@ -128,20 +154,19 @@ public class AStarSearch {
         return any.map(Pair::getRight).orElse(null);
     }
 
-    private static Double calculateF(final Pair<Integer, Integer> neighbour, final Pair<Integer, Integer> dest, final Pair<Integer, Integer> currentNode) {
-        final Double g = currentNode.getRight() + calculateEuclidean(neighbour, currentNode);
+    private static Double calculateF(final Pair<Integer, Integer> source, final Pair<Integer, Integer> neighbour, final Pair<Integer, Integer> dest, final Pair<Integer, Integer> currentNode) {
+        final Double g = calculateEuclidean(currentNode, source) + calculateEuclidean(neighbour, currentNode);
         final Double h = calculateEuclidean(neighbour, dest);
         return g + h;
     }
 
     private static Double calculateEuclidean(final Pair<Integer, Integer> neighbour, final Pair<Integer, Integer> currentNode) {
-        final Double x = (neighbour.getLeft() - currentNode.getLeft()) * (neighbour.getLeft() - currentNode.getLeft()) * 1.0;
-        final Double y = (neighbour.getRight() - currentNode.getRight()) * (neighbour.getRight() - currentNode.getRight()) * 1.0;
-        return Math.sqrt(x + y);
+        final Double x = (neighbour.getLeft() - currentNode.getLeft()) * 1.0;
+        final Double y = (neighbour.getRight() - currentNode.getRight()) * 1.0;
+        return Math.sqrt(x*x + y*y);
     }
 
     private static boolean isValidNeighbour(final Pair<Integer, Integer> neighbour, final int[][] grid) {
-
         // Going outside grid.
         if (neighbour.getLeft() < 0 || neighbour.getLeft() >= grid.length
                 || neighbour.getRight() < 0 || neighbour.getRight() >= grid[0].length) {
@@ -171,12 +196,15 @@ public class AStarSearch {
             { 1, 1, 1, 0, 1, 1, 1, 0, 1, 0 },
             { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
             { 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-            { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
+            { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
             { 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 }
         };
 
         // Source (8, 0) and Destination (0, 0).
         AStarSearch.search(new Pair<Integer, Integer>(8, 0), new Pair<Integer, Integer>(0, 0), grid);
+
+        // Source (0, 0) and Destination (8, 9).
+        AStarSearch.search(new Pair<Integer, Integer>(0, 0), new Pair<Integer, Integer>(8, 9), grid);
     }
 
 }
