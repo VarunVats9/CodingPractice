@@ -1,18 +1,24 @@
 package com.practice.geeksforgeeks.dp.intermediate;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
- * Created by vvats on 07/11/18.
+ * Date : 07 Nov, 2018
+ * Time : 8:58 PM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
 public class PartitionInTwoEqualSets {
 
     /*
      * This is a modified version of Knapsack.
      * Here the weight and values are same, and the limit has to be equal to the sum/2.
+     *
+     * In knapsack problem, the limit tells the maximum weight you have in the knapsack, which can be
+     * achieved, by putting the items in the knapsack, to create weight <= limit. (and which maximizes the value).
+     *
+     * The last step, dp[n][m/2] == m/2, it checks whether we were able to achieve the limit (sum/2).
      */
     private static boolean partitionInteger(final int[] array) {
 
@@ -148,7 +154,5 @@ public class PartitionInTwoEqualSets {
         }
 
     }
-
-
 
 }

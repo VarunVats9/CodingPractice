@@ -1,7 +1,10 @@
 package com.practice.geeksforgeeks.dp.intermediate;
 
 /**
- * Created by vvats on 06/11/18.
+ * Date : 06 Nov, 2018
+ * Time : 2:58 PM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
 public class Knapsack0_1_AndPrintItems {
 
@@ -87,7 +90,7 @@ public class Knapsack0_1_AndPrintItems {
         }
 
         {
-            Knapsack0_1_AndPrintItems.knapSack(new int[]{3, 8, 6}, new int[]{7, 8, 4}, 10);
+            Knapsack0_1_AndPrintItems.knapSack(new int[]{2, 7, 5}, new int[]{2, 7, 5}, 6);
         }
 
         {
