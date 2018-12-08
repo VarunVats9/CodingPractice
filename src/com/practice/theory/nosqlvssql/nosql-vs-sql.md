@@ -6,6 +6,9 @@
 
 ## FETAURES
 
+> Relational Database table:
+![Sql](https://user-images.githubusercontent.com/2538815/49687007-e7219e00-fb22-11e8-95a0-86b68b2eccf3.png)
+
 > Foremost, It scales horizontally and it has distributed architecture.
 
 > It has no single point of failure, as data is replicated, and it can be distributed geographically.
@@ -18,7 +21,7 @@
 
 > Think of non-transactional tasks like loading catalog data on display page or user's preferences.
 
-> ![NoSql](https://user-images.githubusercontent.com/2538815/49687008-e7ba3480-fb22-11e8-8255-e9d47a29ddd1.png) Vs ![Sql](https://user-images.githubusercontent.com/2538815/49687007-e7219e00-fb22-11e8-95a0-86b68b2eccf3.png)
+> ![NoSql](https://user-images.githubusercontent.com/2538815/49687008-e7ba3480-fb22-11e8-8255-e9d47a29ddd1.png)
 
 ## CAP THEOREM
 
