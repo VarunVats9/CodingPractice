@@ -18,7 +18,7 @@
 
 > Think of non-transactional tasks like loading catalog data on display page or user's preferences.
 
-> ![NoSql](https://www.flickr.com/photos/168435189@N03/44371371010/in/dateposted-public/) Vs ![Sql](https://www.flickr.com/photos/168435189@N03/44371371170/in/dateposted-public/)
+> ![NoSql](https://user-images.githubusercontent.com/2538815/49687008-e7ba3480-fb22-11e8-8255-e9d47a29ddd1.png) Vs ![Sql](https://user-images.githubusercontent.com/2538815/49687007-e7219e00-fb22-11e8-95a0-86b68b2eccf3.png)
 
 ## CAP THEOREM
 
@@ -57,18 +57,18 @@ There are ways to work around the case, wherein if system goes down, all the sys
 ## TYPES OF NO-SQL
 
 > Key-Value Stores : Schema free, every row can have any different keys. And it is the basis for other three (check below).
-Example : Redis, DynamoDB, SimpleDB. ![table](https://www.flickr.com/photos/168435189@N03/44371372020/in/dateposted-public/)
+Example : Redis, DynamoDB, SimpleDB. ![table](https://user-images.githubusercontent.com/2538815/49687010-e7ba3480-fb22-11e8-87a5-d65ef26516f5.png)
 
 > Document Stores : So, instead of rows we have documents, which are nothing but javascript objects (JSON). Everything is in a document form, and including
 other documents. Also schema free.
-Example : MongoDB, CouchDB. ![table](https://www.flickr.com/photos/168435189@N03/44371371710/in/dateposted-public/)
+Example : MongoDB, CouchDB. ![table](https://user-images.githubusercontent.com/2538815/49687011-e852cb00-fb22-11e8-9792-2160aa0f47c4.png)
 
 > Wide Column Stores : Not schema free, but semi-schematic. You don't need to mention the schema, but just the group of columns, and not the actual
 columns within those families. So, columns can vary from row to row, but the domain needs to be mentioned prior.
-Example : Cassandra, ApacheHBase. ![table](https://www.flickr.com/photos/168435189@N03/44371371900/in/dateposted-public/)
+Example : Cassandra, ApacheHBase. ![table](https://user-images.githubusercontent.com/2538815/49687009-e7ba3480-fb22-11e8-8e1f-f67dcb5d0b09.png)
 
 > Graph Databases : Relationship focused. Can be used in social graphs.
-Example : Neo4j ![table](https://www.flickr.com/photos/168435189@N03/44371371330/in/dateposted-public/)
+Example : Neo4j ![table](https://user-images.githubusercontent.com/2538815/49687006-e7219e00-fb22-11e8-8a46-39fb71f333bb.png)
 
 
 ## DOs DONTs
