@@ -6,12 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
- * This data structure is used in creating priority queue.
- * Mostly for dijkstra's algorithms, and prim's algorithms.
+ * Date : 5 Nov, 2018
+ * Time : 3:24 PM
+ *
+ * @author : Varun Vats (varunvats32@gmail.com)
  */
 public class BinaryMinHeap<T extends Comparable<T>> {
 
+    /**
+     * This data structure is used in creating priority queue.
+     * Mostly for dijkstra's algorithms, and prim's algorithms.
+     */
     private List<T> array = new ArrayList<T>();
     private Map<T, Integer> pos = new HashMap<>();
 

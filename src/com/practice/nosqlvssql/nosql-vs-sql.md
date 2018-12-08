@@ -1,3 +1,7 @@
+* Date : 5 Dec, 2018
+* Time : 3:24 PM
+* @author : Varun Vats (varunvats32@gmail.com)
+
 # NO-SQL
 
 ## FETAURES
@@ -18,7 +22,7 @@
 
 ## CAP THEOREM
 
-> (C)onsistency : That data is not in inconsistent state in all the nodes of the cluster.
+> (C)onsistency : That data is in consistent state in all the nodes of the cluster.
 
 > (A)vailability : We can get to that data rather quickly.
 
@@ -63,7 +67,7 @@ Example : MongoDB, CouchDB. [table](https://www.flickr.com/photos/168435189@N03/
 columns within those families. So, columns can vary from row to row, but the domain needs to be mentioned prior.
 Example : Cassandra, ApacheHBase. [table](https://www.flickr.com/photos/168435189@N03/44371371900/in/dateposted-public/)
 
-> Graph Databases : Relationship focused. CAn be used in social graphs.
+> Graph Databases : Relationship focused. Can be used in social graphs.
 Example : Neo4j [table](https://www.flickr.com/photos/168435189@N03/44371371330/in/dateposted-public/)
 
 
@@ -79,14 +83,18 @@ is transactional especially financial, should be done with SQL. Like Stock trade
 
 ## SUMMARY
 
-> Line of Business -> Relational
-Large, Public(consumer facing) site -> NoSQL
+> Line of Business -> __Relational__
 
-> Complex data structures -> Relational
-Big Data -> NoSQL
+> Large, Public(consumer facing) site -> __NoSQL__
 
-> Transactional -> Relational
-Content Management -> NoSQL
+> Complex data structures -> __Relational__
 
-> Enterprise -> Relational
-Consumer Web -> NoSQL
+> Big Data -> __NoSQL__
+
+> Transactional -> __Relational__
+
+> Content Management -> __NoSQL__
+
+> Enterprise -> __Relational__
+
+> Consumer Web -> __NoSQL__

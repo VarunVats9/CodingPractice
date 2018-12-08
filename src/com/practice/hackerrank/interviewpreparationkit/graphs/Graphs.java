@@ -3,8 +3,11 @@ package com.practice.hackerrank.interviewpreparationkit.graphs;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Date : 03 Dec, 2018
@@ -218,6 +221,76 @@ public class Graphs {
         }
     }
 
+
+    static private int LIMIT = 100_001;
+    static private int[] parent = new int[LIMIT];
+    static private boolean[] checkMachines = new boolean[LIMIT];
+    /*
+     * Question : Find the minimum time it will take to destroy roads, such that no two machines
+     * have a path between each other.
+     *
+     * [Approach 1 : Kruskal + Disjoint Set]
+     * [Approach 2 : DP (below this method)]
+     */
+    private static int minTime(int[][] roads, int[] machines) {
+
+        Queue<Edge> queue = new PriorityQueue<>(Comparator.comparingInt(Edge::getTime).reversed());
+
+        for (int i = 0; i < roads.length; i++) {
+            queue.add(new Edge(roads[i][0], roads[i][1], roads[i][2]));
+        }
+
+        Arrays.fill(parent, -1);
+        Arrays.fill(checkMachines, false);
+
+        for (int i = 0; i < machines.length; i++) {
+            checkMachines[machines[i]] = true;
+        }
+
+        int totalCount = 0;
+
+        while (!queue.isEmpty()) {
+            Edge edge = queue.remove();
+            if (checkMachines[findParent(edge.n1)] && checkMachines[findParent(edge.n2)]) {
+                totalCount += edge.time;
+            } else {
+                union(edge.n1, edge.n2);
+            }
+        }
+
+        return totalCount;
+    }
+
+    private static void union(final int a, final int b) {
+        int parentA = findParent(a);
+        int parentB = findParent(b);
+        if (checkMachines[parentA]) {
+            parent[parentB] = parentA;
+            return;
+        }
+        parent[parentA] = parentB;
+    }
+
+    private static int findParent(final int a) {
+        if (parent[a] == -1) {
+            return a;
+        }
+        return findParent(parent[a]);
+    }
+
+    private static class Edge {
+        public int n1, n2, time;
+        public Edge(final int n1, final int n2, final int time) {
+            this.n1 = n1;
+            this.n2 = n2;
+            this.time = time;
+        }
+
+        public int getTime() {
+            return this.time;
+        }
+    }
+
     public static void main(String[] args) {
 
         {
@@ -239,6 +312,16 @@ public class Graphs {
 
         {
             System.out.println(Graphs.maxRegion(new int[][]{{1,0,0,0}, {0,1,1,0}, {0,0,1,0}, {1,0,0,0}}));
+        }
+
+        {
+            int[][] roads = new int[][] {
+                    {2, 1, 8},
+                    {1, 0, 5},
+                    {2, 4, 5},
+                    {1, 3, 4}
+            };
+            System.out.println("Minimum time to destroy roads : " + Graphs.minTime(roads, new int[]{2,4,0}));
         }
     }
 

@@ -1,3 +1,7 @@
+* Date : 5 Dec, 2018
+* Time : 3:24 PM
+* @author : Varun Vats (varunvats32@gmail.com)
+
 # BEHAVIORAL PATTERNS
 
 ## CHAIN OF RESPONSIBILITY
@@ -58,11 +62,11 @@ _recognizeable by behavioral methods which invokes a method on an instance of an
 
 ## STATE
 
-_(recognizeable by behavioral methods which changes its behaviour depending on the instance's state which can be controlled externally_
+_recognizeable by behavioral methods which changes its behaviour depending on the instance's state which can be controlled externally_
 
 > javax.faces.lifecycle.LifeCycle#execute() (controlled by FacesServlet, the behaviour is dependent on current phase (state) of JSF lifecycle)
 
-[Who shoudl have the responsibility to change the state, Client or Object ?](https://stackoverflow.com/questions/2105384/what-is-the-best-way-using-the-state-design-pattern-to-change-states)
+[Who should have the responsibility to change the state, Client or Object ?](https://stackoverflow.com/questions/2105384/what-is-the-best-way-using-the-state-design-pattern-to-change-states)
 
 
 ## STRATEGY
