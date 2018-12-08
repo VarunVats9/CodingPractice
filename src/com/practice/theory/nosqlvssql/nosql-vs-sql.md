@@ -18,7 +18,7 @@
 
 > Think of non-transactional tasks like loading catalog data on display page or user's preferences.
 
-> [NoSql](https://www.flickr.com/photos/168435189@N03/44371371010/in/dateposted-public/) Vs [Sql](https://www.flickr.com/photos/168435189@N03/44371371170/in/dateposted-public/)
+> ![NoSql](https://www.flickr.com/photos/168435189@N03/44371371010/in/dateposted-public/) Vs ![Sql](https://www.flickr.com/photos/168435189@N03/44371371170/in/dateposted-public/)
 
 ## CAP THEOREM
 
@@ -57,18 +57,18 @@ There are ways to work around the case, wherein if system goes down, all the sys
 ## TYPES OF NO-SQL
 
 > Key-Value Stores : Schema free, every row can have any different keys. And it is the basis for other three (check below).
-Example : Redis, DynamoDB, SimpleDB. [table](https://www.flickr.com/photos/168435189@N03/44371372020/in/dateposted-public/)
+Example : Redis, DynamoDB, SimpleDB. ![table](https://www.flickr.com/photos/168435189@N03/44371372020/in/dateposted-public/)
 
 > Document Stores : So, instead of rows we have documents, which are nothing but javascript objects (JSON). Everything is in a document form, and including
 other documents. Also schema free.
-Example : MongoDB, CouchDB. [table](https://www.flickr.com/photos/168435189@N03/44371371710/in/dateposted-public/)
+Example : MongoDB, CouchDB. ![table](https://www.flickr.com/photos/168435189@N03/44371371710/in/dateposted-public/)
 
 > Wide Column Stores : Not schema free, but semi-schematic. You don't need to mention the schema, but just the group of columns, and not the actual
 columns within those families. So, columns can vary from row to row, but the domain needs to be mentioned prior.
-Example : Cassandra, ApacheHBase. [table](https://www.flickr.com/photos/168435189@N03/44371371900/in/dateposted-public/)
+Example : Cassandra, ApacheHBase. ![table](https://www.flickr.com/photos/168435189@N03/44371371900/in/dateposted-public/)
 
 > Graph Databases : Relationship focused. Can be used in social graphs.
-Example : Neo4j [table](https://www.flickr.com/photos/168435189@N03/44371371330/in/dateposted-public/)
+Example : Neo4j ![table](https://www.flickr.com/photos/168435189@N03/44371371330/in/dateposted-public/)
 
 
 ## DOs DONTs

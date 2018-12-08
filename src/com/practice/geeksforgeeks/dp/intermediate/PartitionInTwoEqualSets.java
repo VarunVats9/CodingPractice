@@ -110,7 +110,7 @@ public class PartitionInTwoEqualSets {
         /*
          * Printing partition.
          * In this start from the last cell, if the above value is False and the current is True, that means,
-         * the current item has been included, else remove the weight of current item from
+         * the current item has been included, and remove the weight of current item from
          * the column value of the cell.
          */
 
