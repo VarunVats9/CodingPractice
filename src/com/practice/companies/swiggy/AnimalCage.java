@@ -1,4 +1,4 @@
-package com.practice.swiggyinterview;
+package com.practice.companies.swiggy;
 
 public class AnimalCage {
 

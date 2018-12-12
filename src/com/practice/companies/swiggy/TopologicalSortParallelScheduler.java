@@ -1,4 +1,4 @@
-package com.practice.swiggyinterview;
+package com.practice.companies.swiggy;
 
 import java.util.HashMap;
 import java.util.HashSet;
