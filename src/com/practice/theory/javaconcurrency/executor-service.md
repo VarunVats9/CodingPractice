@@ -6,32 +6,33 @@
 
 ## EXECUTOR SERVICE
 
-## Feature 1
+## BASICS
 
-> It runs multiple tasks asynchronously.
+> It runs multiple tasks asynchronously. ![img](https://user-images.githubusercontent.com/2538815/49866276-505c2680-fe2d-11e8-8d8c-be2ec2ab1c3d.png)
+But here, creating so one thread for each task, is an expensive work. 
 
-> It splits the tasks, and the subtasks can run parallely on different cores of CPU, (Forking) and once the taks are done
-all the results are joined together (Joining)
+> So, rather we would want to have fixed number of threads
+which can pull tasks one by one. 
+![img](https://user-images.githubusercontent.com/2538815/49866530-0aec2900-fe2e-11e8-8efc-59dfa4120a96.png)
 
-## Feature 2
+## IDEAL POOL SIZE 
 
+### CASE 1 : CPU INTENSIVE
 
-> Each thread takes the task from the common queue, and then break the task into sub tasks and add those into it's own dequeue, 
-and once one subtask is done, the thread pulls another subtask from the front. In case all the subtasks are done, it can also 
-steal the tasks from some other thread's dequeue, where it will steal from the end of the dequeue.
+> CPU intensive operations can be calculating hash, or encryption.
 
+> It depends on the number of CPUs your machine has, in case you got 4 CPUs but the thread pool you configure is 100,
+then your OS would do time splitting for each thread, that is t0 will run for sometime then t1 ... t99. Hence, ideally
+keep your thread pool size equal to the number of CPUs. ![img](https://user-images.githubusercontent.com/2538815/49866774-b6957900-fe2e-11e8-881b-93b68e63c2c2.png)
 
-## Ways to submit tasks
-1. Same as Executor Service: execute(Runnable), submit(Runnable), submit(Callable)
-2. Own Specific Operations: execute(ForkJoinTask), invoke(ForkJoinTask), submit(ForkJoinTask) 
+### CASE 2 : IO INTENSIVE
 
-## Ideal ForkJoin Tasks
-1. Do not perform blocking I/O
-2. Do not share variables across tasks
-3. Avoid synchronization
+> IO intensive operations can be network (HTTP calls), database calls.
 
-## Use cases
-1. Sorting
-2. Matrix Multiplication
-3. Tree Traversal
-4. Best move finder in a game
+> In this case since most of the time threads would be in waiting state, it is better to have more threads in the thread
+pool.![img](https://user-images.githubusercontent.com/2538815/49867067-62d75f80-fe2f-11e8-8121-69e9139a6fd4.png)
+
+## Summary
+
+![img](https://user-images.githubusercontent.com/2538815/49867216-c497c980-fe2f-11e8-9a51-57e12a4461b1.png)
+
