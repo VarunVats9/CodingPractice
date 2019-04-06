@@ -47,7 +47,7 @@ public class MinimumTimeTraversal {
                     for (int i = 0; i < 5; i++) {
                         pipes[j][i] = Integer.parseInt(str[i]);
                     }
-                    bestPossibleTime(pipes, n)
+                    //bestPossibleTime(pipes, n)
                     System.out.println(MIN);
                     j++;
                 }
