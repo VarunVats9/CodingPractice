@@ -3,6 +3,7 @@ package com.practice.codejam19.qualification;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,27 +17,28 @@ public class CryptoPangrams {
             String line = bufferedReader.readLine();
             int t = Integer.parseInt(line);
             for (int j = 1; j <= t; j++) {
-                ArrayList<Integer> arr = new ArrayList<>();
-                Set<Integer> set = new HashSet<>();
+                ArrayList<BigInteger> arr = new ArrayList<>();
+                Set<BigInteger> set = new HashSet<>();
                 StringBuilder a = new StringBuilder("");
                 line = bufferedReader.readLine();
                 String[] nl = line.split(" ");
-                int n = Integer.parseInt(nl[0]);
+                BigInteger n = new BigInteger(nl[0]);
                 int l = Integer.parseInt(nl[1]);
                 line = bufferedReader.readLine();
                 String[] crypt = line.split(" ");
 
                 CryptObject[] list = new CryptObject[l];
                 CryptObject prevCrypto, currCrypto;
-                int backLoop = 0, startCounter = 0, lastCurr = 0, lastIdx = 0;
+                int backLoop = 0, startCounter = 0, lastIdx = 0;
+                BigInteger lastCurr = new BigInteger("0");
 
                 for (int i = 1; i < l; i++) {
-                    int prev = Integer.parseInt(crypt[i-1]);
-                    int curr = Integer.parseInt(crypt[i]);
-                    if (prev != curr) {
+                    BigInteger prev = new BigInteger(crypt[i-1]);
+                    BigInteger curr = new BigInteger(crypt[i]);
+                    if (prev.compareTo(curr) != 0) {
                         lastCurr = curr;
                         lastIdx = i;
-                        int gcd = calculateGcd(curr, prev);
+                        BigInteger gcd = calculateGcd(curr, prev);
                         if (list[i-1] == null) {
                             prevCrypto = new CryptObject(prev);
                         } else {
@@ -50,8 +52,8 @@ public class CryptoPangrams {
                         if (backLoop != 0) {
                             while (backLoop != 0) {
                                 CryptObject repeatCrypto = list[startCounter];
-                                int primeFront = repeatCrypto.front;
-                                repeatCrypto.back = repeatCrypto.val / primeFront;
+                                BigInteger primeFront = repeatCrypto.front;
+                                repeatCrypto.back = repeatCrypto.val.divide(primeFront);
                                 startCounter--;
                                 if (list[startCounter] == null) {
                                     list[startCounter] = new CryptObject(repeatCrypto.val);
@@ -67,18 +69,18 @@ public class CryptoPangrams {
                 }
 
                 if (backLoop != 0) {
-                    list[lastIdx].front = list[lastIdx].val / list[lastIdx].back;
+                    list[lastIdx].front = list[lastIdx].val.divide(list[lastIdx].back);
                     while (backLoop != 0) {
                         ++lastIdx;
                         list[lastIdx] = new CryptObject(lastCurr);
                         list[lastIdx].back = list[lastIdx - 1].front;
-                        list[lastIdx].front = list[lastIdx].val / list[lastIdx].back;
+                        list[lastIdx].front = list[lastIdx].val.divide(list[lastIdx].back);
                         backLoop--;
                     }
                 }
 
-                list[0].back = list[0].val / list[0].front;
-                list[l-1].front = list[l-1].val / list[l-1].back;
+                list[0].back = list[0].val.divide(list[0].front);
+                list[l-1].front = list[l-1].val.divide(list[l-1].back);
 
                 arr.add(list[0].back);
                 set.add(list[0].back);
@@ -87,10 +89,10 @@ public class CryptoPangrams {
                     set.add(list[p].front);
                 }
 
-                ArrayList<Integer> sortedList = new ArrayList<>(set);
+                ArrayList<BigInteger> sortedList = new ArrayList<>(set);
                 Collections.sort(sortedList);
 
-                HashMap<Integer, Character> map = new HashMap<>();
+                HashMap<BigInteger, Character> map = new HashMap<>();
                 for (int i = 0; i < sortedList.size(); i++) {
                     map.put(sortedList.get(i), (char)('A' + i));
                 }
@@ -108,15 +110,15 @@ public class CryptoPangrams {
 
     private static class CryptObject {
 
-        int val, front, back;
+        BigInteger val, front, back;
 
-        public CryptObject(int val) {
+        public CryptObject(BigInteger val) {
             this.val = val;
         }
     }
 
-    private static int calculateGcd(int a, int b) {
-        if (b == 0) return a;
-        return calculateGcd(b, a%b);
+    private static BigInteger calculateGcd(BigInteger a, BigInteger b) {
+        if (b.compareTo(BigInteger.valueOf(0)) == 0) return a;
+        return calculateGcd(b, a.mod(b));
     }
 }
