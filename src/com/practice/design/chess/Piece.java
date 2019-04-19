@@ -1,19 +1,44 @@
 package com.practice.design.chess;
 
-abstract public class Piece {
+abstract class Piece {
 
-    private int currX, currY, color;
+    protected int color;
+    protected int currX, currY;
+    protected Space space;
+    protected Piece[][] board;
 
-    void moveTo(int x, int y) {
-        if (!movePossible(x, y)) {
-            showMessage(x, y);
-        }
-
-        currX = x;
-        currY = y;
+    enum Space {
+        OCUPPIED,
+        EMPTY
     }
 
-    abstract boolean movePossible(int x, int y);
+    public Piece(int x, int y, int color, Piece[][] board) {
+        this.currX = x;
+        this.currY = y;
+        this.color = color;
+        this.board = board;
+    }
 
-    abstract void showMessage(int x, int y);
+    void moveTo(int x, int y) {
+        if (!isMovePossible(x, y)) {
+            showErrorMessage(x, y);
+        }
+        makeTheMove(x, y);
+    }
+
+    boolean isEmpty() {
+        return this.space == Space.EMPTY;
+    }
+
+    void makeTheMove(int x, int y) {
+        // Cannot make any move
+    }
+
+    boolean isMovePossible(int x, int y) {
+        return false;
+    }
+
+    void showErrorMessage(int x, int y) {
+        // Cannot move further.
+    }
 }
