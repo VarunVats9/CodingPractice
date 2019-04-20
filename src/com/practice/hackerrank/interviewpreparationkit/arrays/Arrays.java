@@ -1,9 +1,9 @@
 package com.practice.hackerrank.interviewpreparationkit.arrays;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.util.Pair;
 
 /**
  * Date : 01 Dec, 2018
@@ -19,15 +19,15 @@ public class Arrays {
      * On range [a, b] : Add k to each value.
      */
     static long arrayManipulation(int n, int[][] queries) {
-        List<Pair<Integer, Integer>> list = new ArrayList<>();
+        List<AbstractMap.SimpleEntry<Integer, Integer>> list = new ArrayList<>();
         for (int i = 0; i < queries.length; i++) {
             int a = queries[i][0];
             int b = queries[i][1];
             int k = queries[i][2];
 
-            list.add(new Pair<>(a, k));
+            list.add(new AbstractMap.SimpleEntry<>(a, k));
             if (b+1 <= n) {
-                list.add(new Pair<>(b+1, -1 * k));
+                list.add(new AbstractMap.SimpleEntry<>(b+1, -1 * k));
             }
         }
 
