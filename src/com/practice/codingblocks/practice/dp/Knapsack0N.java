@@ -31,8 +31,8 @@ public class Knapsack0N {
         }
 
         return dp[idx][S] = s[idx] <= S
-                ? Math.max(recursiveKnapsack(idx, S - s[idx]) + c[idx], recursiveKnapsack(idx+1, S))
-                : recursiveKnapsack(idx+1, S);
+                ? Math.max(dpKnapsack(idx, S - s[idx]) + c[idx], dpKnapsack(idx+1, S))
+                : dpKnapsack(idx+1, S);
     }
 
     public static void main(String[] args) {
