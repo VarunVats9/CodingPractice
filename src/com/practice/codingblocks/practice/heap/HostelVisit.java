@@ -3,8 +3,6 @@ package com.practice.codingblocks.practice.heap;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import static java.lang.Math.pow;
 
@@ -18,8 +16,7 @@ public class HostelVisit {
             int q = Integer.parseInt(str[0]);
             int k = Integer.parseInt(str[1]);
 
-            PriorityQueue<Long> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
-            PriorityQueue<Long> minHeap = new PriorityQueue<>();
+            MaxHeap maxHeap = new MaxHeap();
 
             for (int i = 1; i <= q; i++) {
                 line = bufferedReader.readLine();
@@ -32,13 +29,9 @@ public class HostelVisit {
                     if (maxHeap.size() < k) {
                         maxHeap.add(dist);
                     } else {
-                        Long maxHeapTop = maxHeap.peek();
-                        if (dist <= maxHeapTop) {
+                        if (dist <= maxHeap.peek()) {
                             maxHeap.remove();
-                            minHeap.add(maxHeapTop);
                             maxHeap.add(dist);
-                        } else {
-                            minHeap.add(dist);
                         }
                     }
                 } else {
