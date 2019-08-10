@@ -1,4 +1,4 @@
-package com.practice.design.restaurantreservation.modelandservice;
+package com.practice.design.restaurantreservation;
 
 /**
  * Created by vvats on 23/10/18.

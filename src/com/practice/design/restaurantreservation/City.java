@@ -1,4 +1,4 @@
-package com.practice.design.restaurantreservation.modelandservice;
+package com.practice.design.restaurantreservation;
 
 public enum City {
     DELHI,

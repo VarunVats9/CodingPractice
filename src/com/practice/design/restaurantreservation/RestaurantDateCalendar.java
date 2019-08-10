@@ -1,4 +1,4 @@
-package com.practice.design.restaurantreservation.modelandservice;
+package com.practice.design.restaurantreservation;
 
 import java.time.LocalDate;
 import java.util.HashMap;
