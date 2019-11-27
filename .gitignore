@@ -1,3 +1,7 @@
 /out
 *.iml
 *.idea
+*.template
+chelper.properties
+/output
+CHelperReport.txt
