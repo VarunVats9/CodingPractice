@@ -1,6 +1,4 @@
-package com.practice.chelper;
-
-import org.omg.CORBA.INTERNAL;
+package com.practice.atcoder.abc151;
 
 import java.util.LinkedList;
 import java.util.Queue;
