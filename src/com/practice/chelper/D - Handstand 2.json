@@ -1,0 +1,54 @@
+{
+  "name" : "D - Handstand 2",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "25\n",
+    "output" : "17\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "1\n",
+    "output" : "1\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "100\n",
+    "output" : "108\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "2020\n",
+    "output" : "40812\n",
+    "index" : 3,
+    "active" : true
+  }, {
+    "input" : "200000\n",
+    "output" : "400000008\n",
+    "index" : 4,
+    "active" : true
+  } ],
+  "location" : "src/com/practice/chelper",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "com.practice.chelper.DHandstand2",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.02.03",
+  "contestName" : "AtCoder Beginner Contest 152",
+  "truncate" : true,
+  "inputClass" : "java.util.Scanner",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
