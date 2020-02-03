@@ -1,8 +1,6 @@
 package com.practice.chelper;
 
-import java.sql.PseudoColumnUsage;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.io.PrintWriter;
@@ -20,10 +18,11 @@ public class DHandstand2 {
             }
         }
 
-        int ans = 0;
-        for (Map.Entry<Pair, Integer> entry : map.entrySet()) {
-            Pair p = entry.getKey();
-            ans += map.getOrDefault(new Pair(p.second, p.first), 0);
+        long ans = 0;
+        for (int i = 1; i <= n; i++) {
+            Pair p = f(i);
+            Pair q = new Pair(p.second, p.first);
+            ans += map.getOrDefault(q, 0);
         }
 
         out.println(ans);
