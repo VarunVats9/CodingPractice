@@ -52,11 +52,11 @@ public class EFlatten {
             f = new int[n+1];
             f[0] = f[1] = -1;
             for (int i = 2; i <= n; i++) {
-                if (f[i] == 1) continue;
+                if (f[i] > 0) continue;
                 primes.add(i);
                 f[i] = i;
-                for (int j = i*i; j <= n; j = j+i) {
-                    if (f[j] == 0) f[j] = i;
+                for (long j = (long)i*i; j <= n; j = j+i) {
+                    if (f[(int)j] == 0) f[(int)j] = i;
                 }
             }
         }
@@ -76,7 +76,7 @@ public class EFlatten {
 
         public List<Pair> factors(int x) {
             List<Integer> fl = factorList(x);
-            if (fl.size() == 0) return Collections.EMPTY_LIST;
+            if (fl.size() == 0) return new ArrayList<>();
             List<Pair> res = new ArrayList<>();
             res.add(new Pair(fl.get(0), 0));
             for (int p : fl) {

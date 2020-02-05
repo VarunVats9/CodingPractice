@@ -18,12 +18,12 @@
     "input" : "5\n12 12 12 12 12\n",
     "output" : "5\n",
     "index" : 1,
-    "active" : false
+    "active" : true
   }, {
     "input" : "3\n1000000 999999 999998\n",
     "output" : "996989508\n",
     "index" : 2,
-    "active" : false
+    "active" : true
   } ],
   "location" : "src/com/practice/chelper",
   "vmArgs" : "-Xmx1024M",
