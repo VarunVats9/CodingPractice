@@ -1,4 +1,4 @@
-package com.practice.chelper;
+package com.practice.atcoder.abc152;
 
 import java.util.Scanner;
 import java.io.PrintWriter;

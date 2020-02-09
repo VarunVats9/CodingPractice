@@ -1,5 +1,5 @@
 {
-  "name" : "E - Flatten",
+  "name" : "F - Many Many Paths",
   "testType" : "SINGLE",
   "input" : {
     "type" : "STANDARD",
@@ -10,30 +10,25 @@
     "fileName" : "output.txt"
   },
   "tests" : [ {
-    "input" : "3\n2 3 4\n",
-    "output" : "13\n",
+    "input" : "1 1 2 2\n",
+    "output" : "14\n",
     "index" : 0,
     "active" : true
   }, {
-    "input" : "5\n12 12 12 12 12\n",
-    "output" : "5\n",
+    "input" : "314 159 2653 589\n",
+    "output" : "602215194\n",
     "index" : 1,
-    "active" : true
-  }, {
-    "input" : "3\n1000000 999999 999998\n",
-    "output" : "996989508\n",
-    "index" : 2,
     "active" : true
   } ],
   "location" : "src/com/practice/chelper",
   "vmArgs" : "-Xmx1024M",
   "mainClass" : "Main",
-  "taskClass" : "com.practice.chelper.EFlatten",
+  "taskClass" : "com.practice.chelper.FManyManyPaths",
   "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
   "checkerParameters" : "",
   "testClasses" : [ ],
-  "date" : "2020.02.03",
-  "contestName" : "AtCoder Beginner Contest 152",
+  "date" : "2020.02.09",
+  "contestName" : "AtCoder Beginner Contest 154",
   "truncate" : true,
   "inputClass" : "java.util.Scanner",
   "outputClass" : "java.io.PrintWriter",

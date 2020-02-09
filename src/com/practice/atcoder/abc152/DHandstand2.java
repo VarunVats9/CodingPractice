@@ -1,4 +1,4 @@
-package com.practice.chelper;
+package com.practice.atcoder.abc152;
 
 import java.util.HashMap;
 import java.util.Objects;
