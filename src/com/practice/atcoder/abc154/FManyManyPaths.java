@@ -1,4 +1,4 @@
-package com.practice.chelper;
+package com.practice.atcoder.abc154;
 
 import java.util.Scanner;
 import java.io.PrintWriter;
@@ -10,12 +10,23 @@ public class FManyManyPaths {
         int r2 = in.nextInt();
         int c2 = in.nextInt();
 
-        int r = r2-r1;
-        int c = c2-c1;
+        r1--; c1--;
 
         Combination comb = new Combination(2000005);
-        ModInt ans = comb.calculate(r+c-2, r-1);
+        ModInt a = g(comb, r2, c2);
+        ModInt b = g(comb, r2, c1);
+        ModInt c = g(comb, r1, c2);
+        ModInt d = g(comb, r1, c1);
+
+        ModInt e = ModInt.add(a, d);
+        ModInt f = ModInt.add(b, c);
+        ModInt ans = ModInt.subtract(e, f);
+
         out.println(ans.x);
+    }
+
+    public ModInt g(Combination comb, int r, int c) {
+        return ModInt.subtract(comb.calculate(r+c+2, r+1), new ModInt(1));
     }
 
     public static class Combination {
@@ -68,7 +79,7 @@ public class FManyManyPaths {
 
         public static ModInt subtract(ModInt a, ModInt b) {
             ModInt c = new ModInt(a.x);
-            if ((c.x -= b.x) >= mod) c.x -= mod;
+            if ((c.x += mod - b.x) >= mod) c.x -= mod;
             return c;
         }
 

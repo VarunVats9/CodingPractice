@@ -22,7 +22,7 @@ public class ModInt {
 
     public static ModInt subtract(ModInt a, ModInt b) {
         ModInt c = new ModInt(a.x);
-        if ((c.x -= b.x) >= mod) c.x -= mod;
+        if ((c.x += mod - b.x) >= mod) c.x -= mod;
         return c;
     }
 
@@ -39,7 +39,7 @@ public class ModInt {
     }
 
     public ModInt subtract(ModInt a) {
-        if ((x -= a.x) >= mod) x -= mod;
+        if ((x += mod - a.x) >= mod) x -= mod;
         return new ModInt(x);
     }
 
