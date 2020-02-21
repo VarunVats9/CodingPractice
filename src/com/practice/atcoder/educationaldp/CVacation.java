@@ -1,4 +1,4 @@
-package com.practice.chelper;
+package com.practice.atcoder.educationaldp;
 
 import java.util.Scanner;
 import java.io.PrintWriter;
