@@ -1,0 +1,49 @@
+{
+  "name" : "F - LCS",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "axyb\nabyxb\n",
+    "output" : "axb\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "aa\nxayaz\n",
+    "output" : "aa\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "a\nz\n",
+    "output" : "\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "abracadabra\navadakedavra\n",
+    "output" : "aaadara\n",
+    "index" : 3,
+    "active" : true
+  } ],
+  "location" : "src/com/practice/chelper",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "com.practice.chelper.FLCS",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.02.26",
+  "contestName" : "Educational DP Contest",
+  "truncate" : true,
+  "inputClass" : "java.util.Scanner",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
