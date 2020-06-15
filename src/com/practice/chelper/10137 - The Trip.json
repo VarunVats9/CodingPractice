@@ -1,5 +1,5 @@
 {
-  "name" : "F - LCS",
+  "name" : "10137 - The Trip",
   "testType" : "SINGLE",
   "input" : {
     "type" : "STANDARD",
@@ -10,35 +10,20 @@
     "fileName" : "output.txt"
   },
   "tests" : [ {
-    "input" : "axyb\nabyxb\n",
-    "output" : "axb\n",
+    "input" : "3\n10.00\n20.00\n30.00\n4\n15.00\n15.01\n3.00\n3.01\n0",
+    "output" : "$10.00\n$11.99",
     "index" : 0,
-    "active" : true
-  }, {
-    "input" : "aa\nxayaz\n",
-    "output" : "aa\n",
-    "index" : 1,
-    "active" : true
-  }, {
-    "input" : "a\nz\n",
-    "output" : "\n",
-    "index" : 2,
-    "active" : true
-  }, {
-    "input" : "abracadabra\navadakedavra\n",
-    "output" : "aaadara\n",
-    "index" : 3,
     "active" : true
   } ],
   "location" : "src/com/practice/chelper",
-  "vmArgs" : "-Xmx1024M",
+  "vmArgs" : "-Xmx32M",
   "mainClass" : "Main",
-  "taskClass" : "com.practice.chelper.FLCS",
+  "taskClass" : "com.practice.chelper.TheTrip",
   "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
   "checkerParameters" : "",
   "testClasses" : [ ],
-  "date" : "2020.02.26",
-  "contestName" : "Educational DP Contest",
+  "date" : "2020.06.16",
+  "contestName" : "UVa Online Judge",
   "truncate" : true,
   "inputClass" : "java.util.Scanner",
   "outputClass" : "java.io.PrintWriter",
