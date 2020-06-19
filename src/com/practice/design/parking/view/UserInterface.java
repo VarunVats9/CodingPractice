@@ -9,7 +9,7 @@ import com.practice.design.parking.controller.ParkingManager;
 import com.practice.design.parking.modelandservice.ParkingSystem;
 
 /*
- * This class acts as a View and Main class, it takes the input from user, gives it to the controller.
+ * This class acts as a View and com.practice.cses.introductoryproblems.Main class, it takes the input from user, gives it to the controller.
  * And when it gets the result from controller, it shows it to the user.
  */
 public class UserInterface {

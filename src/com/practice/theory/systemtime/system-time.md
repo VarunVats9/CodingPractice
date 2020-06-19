@@ -17,7 +17,7 @@ Operation | Time
 --- | ---
 `L1 Cache Reference` | **0.5 nsec**
 `L2 Cache Reference` | **5 nsec**
-`Main Memory Reference` | **100 nsec**
+`com.practice.cses.introductoryproblems.Main Memory Reference` | **100 nsec**
 |
 `Mutex Lock/Unlock` | **25 nsec**
 `System Call Overhead` | **400 nsec**

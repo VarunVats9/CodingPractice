@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author varunvats32
  */
-public class Main {
+public class com.practice.cses.introductoryproblems.Main {
 
     public static void main(String[] args) {
         InputStream inputStream = System.in;
