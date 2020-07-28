@@ -1,0 +1,34 @@
+{
+  "name" : "B. Multiply by 2, divide by 6",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "7\n1\n2\n3\n12\n12345\n15116544\n387420489\n",
+    "output" : "0\n-1\n2\n-1\n-1\n12\n36\n",
+    "index" : 0,
+    "active" : true
+  } ],
+  "location" : "src/com/practice/chelper",
+  "vmArgs" : "-Xmx256M",
+  "mainClass" : "Main",
+  "taskClass" : "com.practice.chelper.BMultiplyBy2DivideBy6",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.06.28",
+  "contestName" : "Codeforces - Codeforces Round #653 (Div. 3)",
+  "truncate" : true,
+  "inputClass" : "com.practice.fastio.InputReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
