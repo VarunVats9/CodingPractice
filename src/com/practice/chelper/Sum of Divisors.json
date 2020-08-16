@@ -1,5 +1,5 @@
 {
-  "name" : "Reading Books",
+  "name" : "Sum of Divisors",
   "testType" : "SINGLE",
   "input" : {
     "type" : "STANDARD",
@@ -10,19 +10,19 @@
     "fileName" : "output.txt"
   },
   "tests" : [ {
-    "input" : "3\n2 8 3\n",
-    "output" : "16\n",
+    "input" : "5\n",
+    "output" : "21\n",
     "index" : 0,
     "active" : true
   } ],
   "location" : "src/com/practice/chelper",
   "vmArgs" : "-Xmx512M",
   "mainClass" : "Main",
-  "taskClass" : "com.practice.chelper.ReadingBooks",
+  "taskClass" : "com.practice.chelper.SumOfDivisors",
   "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
   "checkerParameters" : "",
   "testClasses" : [ ],
-  "date" : "2020.06.27",
+  "date" : "2020.08.16",
   "contestName" : "CSES - CSES Problem Set",
   "truncate" : true,
   "inputClass" : "com.practice.fastio.InputReader",
