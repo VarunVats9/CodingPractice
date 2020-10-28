@@ -1,4 +1,4 @@
-package com.practice.chelper;
+package com.practice.cses.mathematics;
 
 import com.practice.fastio.InputReader;
 

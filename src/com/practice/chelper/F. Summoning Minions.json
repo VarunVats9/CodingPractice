@@ -1,5 +1,5 @@
 {
-  "name" : "Exponentiation II",
+  "name" : "F. Summoning Minions",
   "testType" : "SINGLE",
   "input" : {
     "type" : "STANDARD",
@@ -10,20 +10,20 @@
     "fileName" : "output.txt"
   },
   "tests" : [ {
-    "input" : "4\n3 7 1\n15 2 2\n3 4 5\n7 8 10\n",
-    "output" : "2187\n50625\n763327764\n928742408\n",
+    "input" : "3\n5 2\n5 3\n7 0\n5 0\n4 0\n10 0\n2 1\n10 100\n50 10\n5 5\n1 5\n2 4\n3 3\n4 2\n5 1\n",
+    "output" : "4\n2 1 -1 5\n1\n2\n5\n5 4 3 2 1\n",
     "index" : 0,
     "active" : true
   } ],
   "location" : "src/com/practice/chelper",
   "vmArgs" : "-Xmx512M",
   "mainClass" : "Main",
-  "taskClass" : "com.practice.chelper.ExponentiationII",
+  "taskClass" : "com.practice.chelper.FSummoningMinions",
   "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
   "checkerParameters" : "",
   "testClasses" : [ ],
-  "date" : "2020.08.15",
-  "contestName" : "CSES - CSES Problem Set",
+  "date" : "2020.09.20",
+  "contestName" : "Codeforces - Educational Codeforces Round 87 (Rated for Div. 2)",
   "truncate" : true,
   "inputClass" : "com.practice.fastio.InputReader",
   "outputClass" : "java.io.PrintWriter",
