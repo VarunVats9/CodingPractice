@@ -1,5 +1,5 @@
 {
-  "name" : "F. Summoning Minions",
+  "name" : "M - Candies",
   "testType" : "SINGLE",
   "input" : {
     "type" : "STANDARD",
@@ -10,20 +10,35 @@
     "fileName" : "output.txt"
   },
   "tests" : [ {
-    "input" : "3\n5 2\n5 3\n7 0\n5 0\n4 0\n10 0\n2 1\n10 100\n50 10\n5 5\n1 5\n2 4\n3 3\n4 2\n5 1\n",
-    "output" : "4\n2 1 -1 5\n1\n2\n5\n5 4 3 2 1\n",
+    "input" : "3 4\n1 2 3\n",
+    "output" : "5\n",
     "index" : 0,
+    "active" : true
+  }, {
+    "input" : "1 10\n9\n",
+    "output" : "0\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "2 0\n0 0\n",
+    "output" : "1\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "4 100000\n100000 100000 100000 100000\n",
+    "output" : "665683269\n",
+    "index" : 3,
     "active" : true
   } ],
   "location" : "src/com/practice/chelper",
-  "vmArgs" : "-Xmx512M",
+  "vmArgs" : "-Xmx1024M",
   "mainClass" : "Main",
-  "taskClass" : "com.practice.chelper.FSummoningMinions",
+  "taskClass" : "com.practice.chelper.MCandies",
   "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
   "checkerParameters" : "",
   "testClasses" : [ ],
-  "date" : "2020.09.20",
-  "contestName" : "Codeforces - Educational Codeforces Round 87 (Rated for Div. 2)",
+  "date" : "2020.11.24",
+  "contestName" : "AtCoder - Educational DP Contest",
   "truncate" : true,
   "inputClass" : "com.practice.fastio.InputReader",
   "outputClass" : "java.io.PrintWriter",

@@ -1,0 +1,54 @@
+{
+  "name" : "L - Deque",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "4\n10 80 90 30\n",
+    "output" : "10\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "3\n10 100 10\n",
+    "output" : "-80\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "1\n10\n",
+    "output" : "10\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "10\n1000000000 1 1000000000 1 1000000000 1 1000000000 1 1000000000 1\n",
+    "output" : "4999999995\n",
+    "index" : 3,
+    "active" : true
+  }, {
+    "input" : "6\n4 2 9 7 1 5\n",
+    "output" : "2\n",
+    "index" : 4,
+    "active" : true
+  } ],
+  "location" : "src/com/practice/chelper",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "com.practice.chelper.LDeque",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.11.24",
+  "contestName" : "AtCoder - Educational DP Contest",
+  "truncate" : true,
+  "inputClass" : "com.practice.fastio.InputReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

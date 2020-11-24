@@ -47,7 +47,7 @@ public class __TLE__GridPaths {
     }
 
     private boolean validPath(int x, int y, char po, int idx) {
-        return  (s.charAt(idx) == '?' || po == s.charAt(idx))
+        return (s.charAt(idx) == '?' || po == s.charAt(idx))
                 && x >= 0 && x < SIZE && y >= 0 && y < SIZE && !board[x][y];
     }
 }
