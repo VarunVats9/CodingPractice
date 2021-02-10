@@ -1,13 +1,5 @@
 package com.practice.algo.sort;
-
-//import static com.practice.algo.sort.QuickSort.quickSort;
-
-//import java.util.Scanner;
-
 import java.util.Objects;
-
-import com.practice.hackerrank.interviewpreparationkit.arrays.Arrays;
-
 /**
  * Date : 08 Jan, 2019
  * Time : 1:54 PM
@@ -59,16 +51,6 @@ public class QuickSort {
     }
 
     public static void main (String[] args) {
-        /*Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int num = sc.nextInt();
-            arr = new int[num];
-            for (int i  = 0; i < num; i++) {
-                arr[i] = sc.nextInt();
-            }
-            quickSort(0, arr.length - 1);
-        }*/
 
         arr = new int[]{3,7,1,2,0,-4,1,4,6};
 
