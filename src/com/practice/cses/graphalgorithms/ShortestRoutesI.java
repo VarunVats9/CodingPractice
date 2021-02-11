@@ -5,10 +5,7 @@ import com.practice.fastio.InputReader;
 import java.io.PrintWriter;
 import java.util.*;
 
-/*
-* 2) How dist matches to current_dist, line 66. Think on graph.
-* */
-
+/* Dijkstra */
 public class ShortestRoutesI {
 
     static boolean[] visited;
