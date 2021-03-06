@@ -57,6 +57,10 @@ public class GameRoutes {
         }
 
         if (minHeap.isEmpty()) return;
+        /*
+        * Other Indegrees with 0 value, cannot have any impact as counts[], is zero for them.
+        * Else those would have added more counts in our actual path from 1 to N.
+        */
         counts[minHeap.peek().first] = 1;
 
         while (!minHeap.isEmpty()) {

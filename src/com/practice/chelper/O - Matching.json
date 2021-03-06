@@ -1,0 +1,49 @@
+{
+  "name" : "O - Matching",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "3\n0 1 1\n1 0 1\n1 1 1\n",
+    "output" : "3\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "4\n0 1 0 0\n0 0 0 1\n1 0 0 0\n0 0 1 0\n",
+    "output" : "1\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "1\n0\n",
+    "output" : "0\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "21\n0 0 0 0 0 0 0 1 1 0 1 1 1 1 0 0 0 1 0 0 1\n1 1 1 0 0 1 0 0 0 1 0 0 0 0 1 1 1 0 1 1 0\n0 0 1 1 1 1 0 1 1 0 0 1 0 0 1 1 0 0 0 1 1\n0 1 1 0 1 1 0 1 0 1 0 0 1 0 0 0 0 0 1 1 0\n1 1 0 0 1 0 1 0 0 1 1 1 1 0 0 0 0 0 0 0 0\n0 1 1 0 1 1 1 0 1 1 1 0 0 0 1 1 1 1 0 0 1\n0 1 0 0 0 1 0 1 0 0 0 1 1 1 0 0 1 1 0 1 0\n0 0 0 0 1 1 0 0 1 1 0 0 0 0 0 1 1 1 1 1 1\n0 0 1 0 0 1 0 0 1 0 1 1 0 0 1 0 1 0 1 1 1\n0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 0 0 0 1\n0 1 1 0 1 1 0 0 1 1 0 0 0 1 1 1 1 0 1 1 0\n0 0 1 0 0 1 1 1 1 0 1 1 0 1 1 1 0 0 0 0 1\n0 1 1 0 0 1 1 1 1 0 0 0 1 0 1 1 0 1 0 1 1\n1 1 1 1 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 1\n0 0 0 1 1 0 1 1 1 1 0 0 0 0 0 0 1 1 1 1 1\n1 0 1 1 0 1 0 1 0 0 1 0 0 1 1 0 1 0 1 1 0\n0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 1 1 0 0 1\n0 0 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 1 0 1\n0 0 0 0 1 1 1 0 1 0 1 1 1 0 1 1 0 0 1 1 0\n1 1 0 1 1 0 0 1 1 0 1 1 0 1 1 1 1 1 0 1 0\n1 0 0 1 1 0 1 1 1 1 1 0 1 0 1 1 0 0 0 0 0\n",
+    "output" : "102515160\n",
+    "index" : 3,
+    "active" : true
+  } ],
+  "location" : "src/com/practice/chelper",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "com.practice.chelper.OMatching",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2021.03.06",
+  "contestName" : "AtCoder - Educational DP Contest",
+  "truncate" : true,
+  "inputClass" : "com.practice.fastio.InputReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
